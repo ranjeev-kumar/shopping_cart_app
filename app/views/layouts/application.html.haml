@@ -1,0 +1,188 @@
+!!!
+%html
+  %head
+    %title ShoppingCart
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  %body.account-login
+    %nav#top
+      .container
+        .pull-left
+          
+        #top-links.nav.pull-right
+          %ul.list-inline
+            %li
+              %a{href: "#{}"}
+                %i.fa.fa-phone
+              %span.hidden-xs.hidden-sm.hidden-md 123456789
+            %li.dropdown
+              %a.dropdown-toggle{"data-toggle" => "dropdown", title: "My Account"}
+                %i.fa.fa-user
+                %span.hidden-xs.hidden-sm.hidden-md My Account
+                %span.caret
+              %ul.dropdown-menu.dropdown-menu-right
+                %li
+                  = link_to "Register", new_user_registration_path
+                %li
+                  = link_to "Login", new_user_session_path
+            %li
+              %a#wishlist-total{href: "#", title: "Wish List (0)"}
+                %i.fa.fa-heart
+                %span.hidden-xs.hidden-sm.hidden-md Wish List (0)
+            %li
+              %a{href: "#", title: "Shopping Cart"}
+                %i.fa.fa-shopping-cart
+                %span.hidden-xs.hidden-sm.hidden-md Shopping Cart
+            %li
+              %a{href: "#", title: "Checkout"}
+                %i.fa.fa-share
+                %span.hidden-xs.hidden-sm.hidden-md Checkout
+    %header
+      .container
+        .row
+          .col-sm-4
+            #logo
+              %a{href: "#"}
+                = image_tag("logo.png")
+          .col-sm-5
+            #search.input-group
+              %input.form-control.input-lg{name: "search", placeholder: "Search", type: "text", value: ""}
+                %span.input-group-btn
+                  %button.btn.btn-default.btn-lg{type: "button"}
+                    %i.fa.fa-search
+          .col-sm-3
+            #cart.btn-group.btn-block
+              %button.btn.btn-inverse.btn-block.btn-lg.dropdown-toggle{"data-loading-text" => "Loading...", "data-toggle" => "dropdown", type: "button"}
+                %i.fa.fa-shopping-cart
+                %span#cart-total 0 item(s) - Rs. 0.00
+              %ul.dropdown-menu.pull-right
+                %li
+                  %p.text-center Your shopping cart is empty!
+    .container
+      %nav#menu.navbar
+        .navbar-header
+          %span#category.visible-xs Categories
+          %button.btn.btn-navbar.navbar-toggle{"data-target" => ".navbar-ex1-collapse", "data-toggle" => "collapse", :type => "button"}
+            %i.fa.fa-bars
+        .collapse.navbar-collapse.navbar-ex1-collapse
+          %ul.nav.navbar-nav
+            %li.dropdown
+              %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"} Desktops
+              .dropdown-menu
+                .dropdown-inner
+                  %ul.list-unstyled
+                    %li
+                      %a{:href => "#"} PC (0)
+                    %li
+                      %a{:href => "#"} Mac (1)
+                %a.see-all{:href => "#"} See All Desktops
+            %li.dropdown
+              %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"} Laptops &amp; Notebooks
+              .dropdown-menu
+                .dropdown-inner
+                  %ul.list-unstyled
+                    %li
+                      %a{:href => "#"} Macs (0)
+                    %li
+                      %a{:href => "#"} Windows (0)
+                %a.see-all{:href => "#"} See All Laptops &amp; Notebooks
+            %li.dropdown
+              %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"} Components
+              .dropdown-menu
+                .dropdown-inner
+                  %ul.list-unstyled
+                    %li
+                      %a{:href => "#"} Mice and Trackballs (0)
+                    %li
+                      %a{:href => "#"} Monitors (2)
+                    %li
+                      %a{:href => "#"} Printers (0)
+                    %li
+                      %a{:href => "#"} Scanners (0)
+                    %li
+                      %a{:href => "#"} Web Cameras (0)
+                %a.see-all{:href => "#"} See All Components
+            %li
+              %a{:href => "#"} Tablets
+            %li
+              %a{:href => "#"} Software
+            %li
+              %a{:href => "#"} Phones &amp; PDAs
+            %li
+              %a{:href => "#"} Cameras
+            %li.dropdown
+              %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "http://demo.opencart.com/index.php?route=product/category&amp;path=34"} MP3 Players
+              .dropdown-menu{:style => "margin-left: -203.625px;"}
+                .dropdown-inner
+                  %ul.list-unstyled
+                    %li
+                      %a{:href => "#"} test 1 (0)
+                    %li
+                      %a{:href => "#"} test 2 (0)
+                    %li
+                      %a{:href => "#"} test 3 (0)
+                  %ul.list-unstyled
+                    %li
+                      %a{:href => "#"} test 4 (0)
+                    %li
+                      %a{:href => "#"} test 5 (0)
+                    %li
+                      %a{:href => "#"} test 6 (0)
+                %a.see-all{:href => "#"} See All MP3 Players
+    .container
+      %p.notice= notice
+      %p.alert= alert
+      = yield
+    %footer
+      .container
+        .row
+          .col-sm-3
+            %h5 Information
+            %ul.list-unstyled
+              %li
+                %a{href: "#"} About Us
+              %li
+                %a{href: "#"} Delivery Information
+              %li
+                %a{href: "#"} Privacy Policy
+              %li
+                %a{href: "#"} Terms &amp; Conditions
+          .col-sm-3
+            %h5 Customer Service
+            %ul.list-unstyled
+              %li
+                %a{href: "#"} Contact Us
+              %li
+                %a{href: "#"} Returns
+              %li
+                %a{href: "#"} Site Map
+          .col-sm-3
+            %h5 Extras
+            %ul.list-unstyled
+              %li
+                %a{href: "#"} Brands
+              %li
+                %a{href: "#"} Gift Vouchers
+              %li
+                %a{href: "#"} Affiliates
+              %li
+                %a{href: "#"} Specials
+          .col-sm-3
+            %h5 My Account
+            %ul.list-unstyled
+              %li
+                %a{href: "#"} My Account
+              %li
+                %a{href: "#"} Order History
+              %li
+                %a{href: "#"} Wish List
+              %li
+                %a{href: "#"} Newsletter
+        %hr
+          %p
+            Powered By
+            %a{href: "#"} OpenCart
+            %br Your Store © 2016
+
+
