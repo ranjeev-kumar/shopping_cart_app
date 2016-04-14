@@ -17,15 +17,31 @@
                 %i.fa.fa-phone
               %span.hidden-xs.hidden-sm.hidden-md 123456789
             %li.dropdown
-              %a.dropdown-toggle{"data-toggle" => "dropdown", title: "My Account"}
-                %i.fa.fa-user
-                %span.hidden-xs.hidden-sm.hidden-md My Account
-                %span.caret
-              %ul.dropdown-menu.dropdown-menu-right
-                %li
-                  = link_to "Register", new_user_registration_path
-                %li
-                  = link_to "Login", new_user_session_path
+              - unless user_signed_in?
+                %a.dropdown-toggle{"data-toggle" => "dropdown", title: "My Account"}
+                  %i.fa.fa-user
+                  %span.hidden-xs.hidden-sm.hidden-md My Account
+                  %span.caret
+                %ul.dropdown-menu.dropdown-menu-right
+                  %li
+                    = link_to "Register", new_user_registration_path
+                  %li
+                    = link_to "Login", new_user_session_path
+              - else
+                %a.dropdown-toggle{"data-toggle" => "dropdown", title: "#{current_user.fname} #{current_user.lname}"}
+                  %i.fa.fa-user
+                  %span.hidden-xs.hidden-sm.hidden-md 
+                    = "#{current_user.fname} #{current_user.lname}"
+                  %span.caret
+                %ul.dropdown-menu.dropdown-menu-right
+                  %li
+                    = link_to "My Profile"
+                  %li
+                    = link_to "Orders History"
+                  %li
+                    = link_to "Transactions"
+                  %li
+                    = link_to 'Sign Out', destroy_user_session_path, method: :delete
             %li
               %a#wishlist-total{href: "#", title: "Wish List (0)"}
                 %i.fa.fa-heart

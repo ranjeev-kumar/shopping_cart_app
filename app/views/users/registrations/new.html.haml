@@ -1,26 +1,31 @@
 .row
   .col-sm-9#content
     %h1 Register Account
-      %p
-        If you already have an account with us, please 
-        = lonk_to "Click Here", new_user_session_path
-    = simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+    %p
+      If you already have an account with us, please 
+      = link_to "Click Here", new_user_session_path
+    = simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html:{class: "form-horizontal"}) do |f|
       = devise_error_messages!
-      .form-group
-        = f.input :fname, autofocus: true, class:'form-control', placeholder:'First Name'
-      .form-group
-        = f.input :lname, input_class:'form-control', placeholder:'Last Name'
-      .form-group
-        = f.input :email, class:'form-control', id:'inputEmail3', placeholder:'Email'
-      .form-group
-        = f.input :phone, class:'form-control', id:'inputEmail3', placeholder:'Email'
-      .form-group
-        = f.input :gender, collection: ["Male", "Female"], as: :radio_buttons
+      %fieldset#account
+        %legend Your Personal Details
+        .form-group.required{:style => "display: none;"}
+          
+        .form-group.required
+          = f.input :fname, autofocus: true, input_class:'form-control', placeholder:'First Name'
+        .form-group.required
+          = f.input :lname, input_class:'form-control', placeholder:'Last Name'
+        .form-group.required
+          = f.input :email, class:'form-control', id:'inputEmail3', placeholder:'Email'
+        .form-group.required
+          = f.input :phone, class:'form-control', id:'inputEmail3', placeholder:'Mobile no.'
       
-      .form-group
-        = f.input :password, autocomplete: "off", class:'form-control', hint: "Password should be 8 characters long.", placeholder:'Password'
-      .form-group
-        = f.input :password_confirmation, autocomplete: "off", class:'form-control', placeholder:'Confirm Password', label: "Confirm Password"
+      %fieldset
+        %legend Your Password
+        .form-group
+          = f.input :password, autocomplete: "off", class:'form-control', hint: "Password should be 8 characters long.", placeholder:'Password'
+        .form-group
+          = f.input :password_confirmation, autocomplete: "off", class:'form-control', placeholder:'Confirm Password', label: "Confirm Password"
+      
       .button.pull-right
         = f.button :submit, 'Sign Up', class: 'btn btn-primary'
   %column#column-right.col-sm-3.hidden-xs

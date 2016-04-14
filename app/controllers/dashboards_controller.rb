@@ -1,12 +1,6 @@
 class DashboardsController < ApplicationController
 
   def index      
-  end    
-
-  def new 
-  end
-
-  def show
-    
+    @products = Product.all
   end
 end
