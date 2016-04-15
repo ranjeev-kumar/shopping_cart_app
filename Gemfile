@@ -35,6 +35,8 @@ gem "less-rails"
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 # Use bootstrap date-picker
 gem 'bootstrap-datepicker-rails'
+# Upload mulitple files
+gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

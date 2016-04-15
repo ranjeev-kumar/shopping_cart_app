@@ -1,4 +1,13 @@
 GIT
+  remote: git://github.com/carrierwaveuploader/carrierwave.git
+  revision: adffd65d14df3fa882a0513fffddeb6bd44ff4b4
+  specs:
+    carrierwave (0.11.0)
+      activemodel (>= 4.0.0)
+      activesupport (>= 4.0.0)
+      mime-types (>= 1.16)
+
+GIT
   remote: git://github.com/seyhunak/twitter-bootstrap-rails.git
   revision: c6893c3db02108bcdee7f8f333531b99806779ac
   specs:
@@ -201,6 +210,7 @@ PLATFORMS
 DEPENDENCIES
   bootstrap-datepicker-rails
   byebug
+  carrierwave!
   coffee-rails (~> 4.1.0)
   devise
   haml
