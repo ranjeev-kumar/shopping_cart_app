@@ -59,8 +59,7 @@
         .row
           .col-sm-4
             #logo
-              %a{href: "#"}
-                = image_tag("logo.png")
+              = link_to image_tag("logo.png"), dashboards_path
           .col-sm-5
             #search.input-group
               %input.form-control.input-lg{name: "search", placeholder: "Search", type: "text", value: ""}
@@ -83,69 +82,18 @@
             %i.fa.fa-bars
         .collapse.navbar-collapse.navbar-ex1-collapse
           %ul.nav.navbar-nav
-            %li.dropdown
-              %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"} Desktops
-              .dropdown-menu
-                .dropdown-inner
-                  %ul.list-unstyled
-                    %li
-                      %a{:href => "#"} PC (0)
-                    %li
-                      %a{:href => "#"} Mac (1)
-                %a.see-all{:href => "#"} See All Desktops
-            %li.dropdown
-              %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"} Laptops &amp; Notebooks
-              .dropdown-menu
-                .dropdown-inner
-                  %ul.list-unstyled
-                    %li
-                      %a{:href => "#"} Macs (0)
-                    %li
-                      %a{:href => "#"} Windows (0)
-                %a.see-all{:href => "#"} See All Laptops &amp; Notebooks
-            %li.dropdown
-              %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"} Components
-              .dropdown-menu
-                .dropdown-inner
-                  %ul.list-unstyled
-                    %li
-                      %a{:href => "#"} Mice and Trackballs (0)
-                    %li
-                      %a{:href => "#"} Monitors (2)
-                    %li
-                      %a{:href => "#"} Printers (0)
-                    %li
-                      %a{:href => "#"} Scanners (0)
-                    %li
-                      %a{:href => "#"} Web Cameras (0)
-                %a.see-all{:href => "#"} See All Components
-            %li
-              %a{:href => "#"} Tablets
-            %li
-              %a{:href => "#"} Software
-            %li
-              %a{:href => "#"} Phones &amp; PDAs
-            %li
-              %a{:href => "#"} Cameras
-            %li.dropdown
-              %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "http://demo.opencart.com/index.php?route=product/category&amp;path=34"} MP3 Players
-              .dropdown-menu{:style => "margin-left: -203.625px;"}
-                .dropdown-inner
-                  %ul.list-unstyled
-                    %li
-                      %a{:href => "#"} test 1 (0)
-                    %li
-                      %a{:href => "#"} test 2 (0)
-                    %li
-                      %a{:href => "#"} test 3 (0)
-                  %ul.list-unstyled
-                    %li
-                      %a{:href => "#"} test 4 (0)
-                    %li
-                      %a{:href => "#"} test 5 (0)
-                    %li
-                      %a{:href => "#"} test 6 (0)
-                %a.see-all{:href => "#"} See All MP3 Players
+            - @categories.each do |category|
+              %li.dropdown
+                %a.dropdown-toggle{"data-toggle" => "dropdown"} 
+                  = category.name
+                .dropdown-menu
+                  .dropdown-inner
+                    %ul.list-unstyled
+                      - category.subcategories.each do |subcat|
+                        %li
+                          = link_to subcat.name, category_path(subcat)
+                  .see-all
+                    = link_to category.name, category_path(category)
     .container
       %p.notice= notice
       %p.alert= alert

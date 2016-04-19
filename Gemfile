@@ -37,6 +37,8 @@ gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootst
 gem 'bootstrap-datepicker-rails'
 # Upload mulitple files
 gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
+# Use Pagination
+gem 'will_paginate', '~> 3.0.6'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

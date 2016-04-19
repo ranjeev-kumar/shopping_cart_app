@@ -1,0 +1,36 @@
+.row
+  .col-sm-3.hidden-xs#column-left
+  .col-sm-9#content
+    %h2
+    -if @products.present?
+      %p
+      .row
+        -@products.each do |product|
+          .product-layout.product-grid.col-lg-4.col-md-4.col-sm-6.col-xs-12
+            .product-thumb
+              .image
+                = link_to image_tag("logo.png", height: 200, width: 200), product_path(product)
+              .div
+                .caption
+                  %h4
+                    = link_to product.name, product_path(product)
+                  %p
+                    = product.description
+                  %p.price
+                    %span.price-new
+                      Price : Rs. 
+                      = product.price
+                .button-group
+                  %button{:onclick => "cart.add('43');", :type => "button"}
+                    %i.fa.fa-shopping-cart
+                    %span.hidden-xs.hidden-sm.hidden-md Add to Cart
+                  %button{"data-original-title" => "Add to Wish List", "data-toggle" => "tooltip", :onclick => "wishlist.add('43');", :title => "", :type => "button"}
+                    %i.fa.fa-heart
+                  %button{"data-original-title" => "Compare this Product", "data-toggle" => "tooltip", :onclick => "compare.add('43');", :title => "", :type => "button"}
+                    %i.fa.fa-exchange
+      .row
+        .col-sm-6.text-left
+        .col-sm-6.text-right
+          = will_paginate @products
+    - else
+      %p There are no products to list in this category.

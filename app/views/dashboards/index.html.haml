@@ -23,4 +23,8 @@
                 %i.fa.fa-heart
               %button{"data-original-title" => "Compare this Product", "data-toggle" => "tooltip", :onclick => "compare.add('43');", :title => "", :type => "button"}
                 %i.fa.fa-exchange
+.row
+  .col-sm-6.text-left
+  .col-sm-6.text-right
+    = will_paginate @products
       
