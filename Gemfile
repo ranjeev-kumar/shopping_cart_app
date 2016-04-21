@@ -36,7 +36,7 @@ gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootst
 # Use bootstrap date-picker
 gem 'bootstrap-datepicker-rails'
 # Upload mulitple files
-gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
+gem 'carrierwave'
 # Use Pagination
 gem 'will_paginate', '~> 3.0.6'
 

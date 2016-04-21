@@ -13,7 +13,7 @@
         #top-links.nav.pull-right
           %ul.list-inline
             %li
-              %a{href: "#{}"}
+              %a{input: "#{}"}
                 %i.fa.fa-phone
               %span.hidden-xs.hidden-sm.hidden-md 123456789
             %li.dropdown
@@ -43,15 +43,16 @@
                   %li
                     = link_to 'Sign Out', destroy_user_session_path, method: :delete
             %li
-              %a#wishlist-total{href: "#", title: "Wish List (0)"}
+              %a#wishlist-total{input: "#", title: "Wish List (0)"}
                 %i.fa.fa-heart
                 %span.hidden-xs.hidden-sm.hidden-md Wish List (0)
             %li
-              %a{href: "#", title: "Shopping Cart"}
+              %a{title: "Shopping Cart"}
                 %i.fa.fa-shopping-cart
-                %span.hidden-xs.hidden-sm.hidden-md Shopping Cart
+                %span.hidden-xs.hidden-sm.hidden-md
+                  = link_to "Shopping Cart", cart_items_path
             %li
-              %a{href: "#", title: "Checkout"}
+              %a{input: "#", title: "Checkout"}
                 %i.fa.fa-share
                 %span.hidden-xs.hidden-sm.hidden-md Checkout
     %header
@@ -70,10 +71,48 @@
             #cart.btn-group.btn-block
               %button.btn.btn-inverse.btn-block.btn-lg.dropdown-toggle{"data-loading-text" => "Loading...", "data-toggle" => "dropdown", type: "button"}
                 %i.fa.fa-shopping-cart
-                %span#cart-total 0 item(s) - Rs. 0.00
+                %span#cart-total 
+                  = "#{item_counts} item(s) - Rs. 0.00"
               %ul.dropdown-menu.pull-right
-                %li
-                  %p.text-center Your shopping cart is empty!
+                - unless item_counts.present?
+                  %li
+                    %p.text-center Your shopping cart is empty!
+                - else
+                  %li
+                    %table.table.table-striped
+                      %tbody
+                        %tr
+                          %td.text-center
+                            %a{:href => "http://demo.opencart.com/index.php?route=product/product&amp;product_id=40"}
+                              %img.img-thumbnail{:alt => "iPhone", :src => "http://demo.opencart.com/image/cache/catalog/demo/iphone_1-47x47.jpg", :title => "iPhone"}/
+                          %td.text-left
+                            %a{:href => "http://demo.opencart.com/index.php?route=product/product&amp;product_id=40"} iPhone
+                          %td.text-right x 1
+                          %td.text-right 96.66€
+                          %td.text-center
+                            %button.btn.btn-danger.btn-xs{:onclick => "cart.remove('YToxOntzOjEwOiJwcm9kdWN0X2lkIjtpOjQwO30=');", :title => "Remove", :type => "button"}
+                              %i.fa.fa-times
+                  %li
+                    %div
+                      %table.table.table-bordered
+                        %tbody
+                          %tr
+                            %td.text-right
+                              %strong Sub-Total
+                            %td.text-right 784.60€
+                          %tr
+                            %td.text-right
+                              %strong Total
+                            %td.text-right 784.60€
+                      %p.text-right
+                        %a{:href => "http://demo.opencart.com/index.php?route=checkout/cart"}
+                          %strong
+                            %i.fa.fa-shopping-cart
+                            View Cart
+                        %a{:href => "http://demo.opencart.com/index.php?route=checkout/checkout"}
+                          %strong
+                            %i.fa.fa-share
+                            Checkout
     .container
       %nav#menu.navbar
         .navbar-header
@@ -105,48 +144,48 @@
             %h5 Information
             %ul.list-unstyled
               %li
-                %a{href: "#"} About Us
+                %a{input: "#"} About Us
               %li
-                %a{href: "#"} Delivery Information
+                %a{input: "#"} Delivery Information
               %li
-                %a{href: "#"} Privacy Policy
+                %a{input: "#"} Privacy Policy
               %li
-                %a{href: "#"} Terms &amp; Conditions
+                %a{input: "#"} Terms &amp; Conditions
           .col-sm-3
             %h5 Customer Service
             %ul.list-unstyled
               %li
-                %a{href: "#"} Contact Us
+                %a{input: "#"} Contact Us
               %li
-                %a{href: "#"} Returns
+                %a{input: "#"} Returns
               %li
-                %a{href: "#"} Site Map
+                %a{input: "#"} Site Map
           .col-sm-3
             %h5 Extras
             %ul.list-unstyled
               %li
-                %a{href: "#"} Brands
+                %a{input: "#"} Brands
               %li
-                %a{href: "#"} Gift Vouchers
+                %a{input: "#"} Gift Vouchers
               %li
-                %a{href: "#"} Affiliates
+                %a{input: "#"} Affiliates
               %li
-                %a{href: "#"} Specials
+                %a{input: "#"} Specials
           .col-sm-3
             %h5 My Account
             %ul.list-unstyled
               %li
-                %a{href: "#"} My Account
+                %a{input: "#"} My Account
               %li
-                %a{href: "#"} Order History
+                %a{input: "#"} Order History
               %li
-                %a{href: "#"} Wish List
+                %a{input: "#"} Wish List
               %li
-                %a{href: "#"} Newsletter
+                %a{input: "#"} Newsletter
         %hr
           %p
             Powered By
-            %a{href: "#"} OpenCart
+            %a{input: "#"} OpenCart
             %br Your Store © 2016
 
 

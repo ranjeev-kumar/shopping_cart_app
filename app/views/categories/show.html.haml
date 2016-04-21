@@ -23,7 +23,8 @@
                 .button-group
                   %button{:onclick => "cart.add('43');", :type => "button"}
                     %i.fa.fa-shopping-cart
-                    %span.hidden-xs.hidden-sm.hidden-md Add to Cart
+                    %span.hidden-xs.hidden-sm.hidden-md
+                      = link_to 'ADD TO CART', add_product_cart_item_path(product), method: :post
                   %button{"data-original-title" => "Add to Wish List", "data-toggle" => "tooltip", :onclick => "wishlist.add('43');", :title => "", :type => "button"}
                     %i.fa.fa-heart
                   %button{"data-original-title" => "Compare this Product", "data-toggle" => "tooltip", :onclick => "compare.add('43');", :title => "", :type => "button"}
@@ -34,3 +35,6 @@
           = will_paginate @products
     - else
       %p There are no products to list in this category.
+      .buttons
+        .pull-right
+          = link_to 'Continue', dashboards_path, input_class: 'btn btn-primary'

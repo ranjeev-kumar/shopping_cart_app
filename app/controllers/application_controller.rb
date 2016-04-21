@@ -3,8 +3,9 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  before_filter :configure_sanitized_params, if: :devise_controller?
-  before_filter :categories_list
+  # filters
+  before_action :configure_sanitized_params, if: :devise_controller?
+  before_action :categories_list
 
   def configure_sanitized_params
     devise_parameter_sanitizer.for(:sign_up) {|u| u.permit(:fname, :lname, :phone, :email, :password)}
@@ -21,4 +22,5 @@ class ApplicationController < ActionController::Base
   def categories_list
     @categories = Category.where(category_id: nil)
   end
+
 end

@@ -4,27 +4,27 @@
       .col-sm-8
         %ul.thumbnails
           %li
-            %a.thumbnail{:href => "http://demo.opencart.com/image/cache/catalog/demo/macbook_1-500x500.jpg", :title => "MacBook"}
+            %a.thumbnail{:input => "http://demo.opencart.com/image/cache/catalog/demo/macbook_1-500x500.jpg", :title => "MacBook"}
               %img{:alt => "MacBook", :src => "http://demo.opencart.com/image/cache/catalog/demo/macbook_1-228x228.jpg", :title => "MacBook"}
           %li.image-additional
-            %a.thumbnail{:href => "http://demo.opencart.com/image/cache/catalog/demo/macbook_5-500x500.jpg", :title => "MacBook"}
+            %a.thumbnail{:input => "http://demo.opencart.com/image/cache/catalog/demo/macbook_5-500x500.jpg", :title => "MacBook"}
               %img{:alt => "MacBook", :src => "http://demo.opencart.com/image/cache/catalog/demo/macbook_5-74x74.jpg", :title => "MacBook"}
           %li.image-additional
-            %a.thumbnail{:href => "http://demo.opencart.com/image/cache/catalog/demo/macbook_4-500x500.jpg", :title => "MacBook"}
+            %a.thumbnail{:input => "http://demo.opencart.com/image/cache/catalog/demo/macbook_4-500x500.jpg", :title => "MacBook"}
               %img{:alt => "MacBook", :src => "http://demo.opencart.com/image/cache/catalog/demo/macbook_4-74x74.jpg", :title => "MacBook"}
           %li.image-additional
-            %a.thumbnail{:href => "http://demo.opencart.com/image/cache/catalog/demo/macbook_2-500x500.jpg", :title => "MacBook"}
+            %a.thumbnail{:input => "http://demo.opencart.com/image/cache/catalog/demo/macbook_2-500x500.jpg", :title => "MacBook"}
               %img{:alt => "MacBook", :src => "http://demo.opencart.com/image/cache/catalog/demo/macbook_2-74x74.jpg", :title => "MacBook"}
           %li.image-additional
-            %a.thumbnail{:href => "http://demo.opencart.com/image/cache/catalog/demo/macbook_3-500x500.jpg", :title => "MacBook"}
+            %a.thumbnail{:input => "http://demo.opencart.com/image/cache/catalog/demo/macbook_3-500x500.jpg", :title => "MacBook"}
               %img{:alt => "MacBook", :src => "http://demo.opencart.com/image/cache/catalog/demo/macbook_3-74x74.jpg", :title => "MacBook"}
         %ul.nav.nav-tabs
           %li.active
-            %a{"data-toggle" => "tab", :href => "#tab-description"} Description
+            %a{"data-toggle" => "tab", :input => "#tab-description"} Description
           %li
-            %a{"data-toggle" => "tab", :href => "#tab-specification"} Specification
+            %a{"data-toggle" => "tab", :input => "#tab-specification"} Specification
           %li
-            %a{"data-toggle" => "tab", :href => "#tab-review"} Reviews (0)
+            %a{"data-toggle" => "tab", :input => "#tab-review"} Reviews (0)
       .col-sm-4
         .btn-group
           %button.btn.btn-default{"data-original-title" => "Add to Wish List", "data-toggle" => "tooltip", :title => "", :type => "button"}
@@ -36,7 +36,7 @@
         %ul.list-unstyled
           %li
             Brand:
-            %a{:href => "http://demo.opencart.com/index.php?route=product/manufacturer/info&amp;manufacturer_id=8"} Apple
+            %a{:input => "http://demo.opencart.com/index.php?route=product/manufacturer/info&amp;manufacturer_id=8"} Apple
           %li 
             Product Code: 
             = @product.id
@@ -65,8 +65,8 @@
               %i.fa.fa-star-o.fa-stack-1x
             %span.fa.fa-stack
               %i.fa.fa-star-o.fa-stack-1x
-            %a{:href => "", :onclick => "$('a[href=\\'#tab-review\\']').trigger('click'); return false;"} 0 reviews
+            %a{:input => "", :onclick => "$('a[input=\\'#tab-review\\']').trigger('click'); return false;"} 0 reviews
             \/
-            %a{:href => "", :onclick => "$('a[href=\\'#tab-review\\']').trigger('click'); return false;"} Write a review
+            %a{:input => "", :onclick => "$('a[input=\\'#tab-review\\']').trigger('click'); return false;"} Write a review
           %hr
       

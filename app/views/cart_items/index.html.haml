@@ -1,0 +1,46 @@
+.row
+  .col-sm-12#content
+    %h1 Shopping Cart
+    .table-responsive
+      %table.table.table-bordered
+        %thead
+          %tr
+            %td.text-center Image
+            %td.text-left Product Name
+            %td.text-left Model
+            %td.text-left Quantity
+            %td.text-right Unit Price
+            %td.text-right Total
+        %tbody
+          -@cart_products.each do |product|
+            %tr
+              %td.text-center
+                = link_to image_tag("logo.png", height: 100, width: 200), product_path(product)
+              %td.text-left
+                = link_to product.name, product_path(product)
+                %span.text-danger ***
+                %br
+                  %small Reward Points: 600
+              %td.text-left Product 16
+              %td.text-left
+                .input-group.btn-block{:style => "max-width: 130px;"}
+                  %input.form-control{size: "1", type: "text", value: "#{product.quantity}"}
+                    %span.input-group-btn
+                      = link_to '', cart_item_path(product), method: :put , type: 'button', class: 'btn btn-primary fa fa-refresh'
+                      %button.btn.btn-danger.fa.fa-times-circle
+              %td.text-right
+                = product.price
+              %td.text-right
+                = product.amount
+    .row
+      .col-sm-4.col-sm-offset-8
+        %table.table.table-bordered
+          %tbody
+            %tr
+              %td.text-right
+                %strong Sub-Total:
+              %td.text-right 392.30€
+            %tr
+              %td.text-right
+                %strong Total:
+              %td.text-right 392.30€
