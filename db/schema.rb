@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160420094330) do
+ActiveRecord::Schema.define(version: 20160422144625) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -104,6 +104,24 @@ ActiveRecord::Schema.define(version: 20160420094330) do
 
   add_index "images", ["product_id"], name: "index_images_on_product_id", using: :btree
 
+  create_table "order_details", force: :cascade do |t|
+    t.integer  "quantity",                               default: 0
+    t.decimal  "amount",        precision: 12, scale: 2
+    t.integer  "product_id"
+    t.integer  "user_order_id"
+    t.datetime "created_at",                                         null: false
+    t.datetime "updated_at",                                         null: false
+  end
+
+  add_index "order_details", ["product_id"], name: "index_order_details_on_product_id", using: :btree
+  add_index "order_details", ["user_order_id"], name: "index_order_details_on_user_order_id", using: :btree
+
+  create_table "payment_gateways", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "product_attribute_values", force: :cascade do |t|
     t.integer  "product_id"
     t.integer  "product_attribute_id"
@@ -132,6 +150,24 @@ ActiveRecord::Schema.define(version: 20160420094330) do
     t.datetime "created_at",                                          null: false
     t.datetime "updated_at",                                          null: false
   end
+
+  create_table "user_orders", force: :cascade do |t|
+    t.integer  "quantity",                                     default: 0
+    t.decimal  "total_amount",        precision: 12, scale: 2
+    t.decimal  "shipping_carge",      precision: 12, scale: 2
+    t.string   "status",                                       default: "pending"
+    t.integer  "billing_address_id"
+    t.integer  "shipping_address_id"
+    t.integer  "user_id"
+    t.integer  "payment_gateway_id"
+    t.integer  "coupon_id"
+    t.datetime "created_at",                                                       null: false
+    t.datetime "updated_at",                                                       null: false
+  end
+
+  add_index "user_orders", ["coupon_id"], name: "index_user_orders_on_coupon_id", using: :btree
+  add_index "user_orders", ["payment_gateway_id"], name: "index_user_orders_on_payment_gateway_id", using: :btree
+  add_index "user_orders", ["user_id"], name: "index_user_orders_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "fname"

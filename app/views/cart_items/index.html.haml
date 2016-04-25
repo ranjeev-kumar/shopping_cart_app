@@ -1,17 +1,19 @@
 .row
-  .col-sm-12#content
+  .col-sm-1
+  .col-sm-9#content
     %h1 Shopping Cart
-    .table-responsive
-      %table.table.table-bordered
-        %thead
-          %tr
-            %td.text-center Image
-            %td.text-left Product Name
-            %td.text-left Model
-            %td.text-left Quantity
-            %td.text-right Unit Price
-            %td.text-right Total
-        %tbody
+    - if @cart_products.present?
+      .table-responsive
+        %table.table.table-bordered
+          %thead
+            %tr
+              %td.text-center Image
+              %td.text-left Product Name
+              %td.text-left Model
+              %td.text-left Quantity
+              %td.text-right Unit Price
+              %td.text-right Total
+          %tbody
           -@cart_products.each do |product|
             %tr
               %td.text-center
@@ -24,23 +26,35 @@
               %td.text-left Product 16
               %td.text-left
                 .input-group.btn-block{:style => "max-width: 130px;"}
-                  %input.form-control{size: "1", type: "text", value: "#{product.quantity}"}
+                  %input.form-control{id: "#{product.id}", size: "1", type: "text", value: "#{product.quantity}"}
                     %span.input-group-btn
-                      = link_to '', cart_item_path(product), method: :put , type: 'button', class: 'btn btn-primary fa fa-refresh'
-                      %button.btn.btn-danger.fa.fa-times-circle
+                      = link_to '', cart_item_path(product), method: :delete, data: { confirm: 'Are You Sure?'}, type: "button", class: 'btn btn-danger fa fa-times-circle'
               %td.text-right
                 = product.price
               %td.text-right
                 = product.amount
-    .row
-      .col-sm-4.col-sm-offset-8
-        %table.table.table-bordered
-          %tbody
-            %tr
-              %td.text-right
-                %strong Sub-Total:
-              %td.text-right 392.30€
-            %tr
-              %td.text-right
-                %strong Total:
-              %td.text-right 392.30€
+    - else
+      %p There are no products in your cart.
+      .buttons
+        .pull-right
+          = link_to 'Continue Shopping', dashboards_path, input_class: 'btn btn-primary'
+    - if @cart_products.present?
+      .row
+        .col-sm-4.col-sm-offset-8
+          %table.table.table-bordered
+            %tbody
+              %tr
+                %td.text-right
+                  %strong Sub-Total:
+                %td.text-right
+                  = @total_amount
+              %tr
+                %td.text-right
+                  %strong Total:
+                %td.text-right
+                  = @total_amount
+      .buttons
+        .pull-left
+          = link_to 'Continue Shopping', dashboards_path, type: 'button', class: 'btn btn-default'
+        .pull-right
+          = link_to 'Place Order', dashboards_path, type: 'button', class: 'btn btn-primary'

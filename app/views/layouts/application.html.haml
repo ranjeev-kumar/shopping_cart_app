@@ -43,18 +43,16 @@
                   %li
                     = link_to 'Sign Out', destroy_user_session_path, method: :delete
             %li
-              %a#wishlist-total{input: "#", title: "Wish List (0)"}
-                %i.fa.fa-heart
-                %span.hidden-xs.hidden-sm.hidden-md Wish List (0)
+              %i.fa.fa-heart
+              %span.hidden-xs.hidden-sm.hidden-md Wish List (0)
             %li
-              %a{title: "Shopping Cart"}
-                %i.fa.fa-shopping-cart
-                %span.hidden-xs.hidden-sm.hidden-md
-                  = link_to "Shopping Cart", cart_items_path
+              %i.fa.fa-shopping-cart
+              %span.hidden-xs.hidden-sm.hidden-md
+                = link_to "Shopping Cart", cart_items_path
             %li
-              %a{input: "#", title: "Checkout"}
-                %i.fa.fa-share
-                %span.hidden-xs.hidden-sm.hidden-md Checkout
+              %i.fa.fa-share
+              %span.hidden-xs.hidden-sm.hidden-md
+                = link_to "Checkout", cart_items_path
     %header
       .container
         .row
@@ -72,25 +70,28 @@
               %button.btn.btn-inverse.btn-block.btn-lg.dropdown-toggle{"data-loading-text" => "Loading...", "data-toggle" => "dropdown", type: "button"}
                 %i.fa.fa-shopping-cart
                 %span#cart-total 
-                  = "#{item_counts} item(s) - Rs. 0.00"
+                  = "#{item_counts} item(s) - Rs.#{@total_amount}"
               %ul.dropdown-menu.pull-right
-                - unless item_counts.present?
+                - unless @cart_products.present?
                   %li
                     %p.text-center Your shopping cart is empty!
                 - else
                   %li
                     %table.table.table-striped
                       %tbody
+                      -@cart_products.each do |product|
                         %tr
                           %td.text-center
-                            %a{:href => "http://demo.opencart.com/index.php?route=product/product&amp;product_id=40"}
-                              %img.img-thumbnail{:alt => "iPhone", :src => "http://demo.opencart.com/image/cache/catalog/demo/iphone_1-47x47.jpg", :title => "iPhone"}/
+                            = link_to image_tag("logo.png", height: 100, width: 200), product_path(product)
                           %td.text-left
-                            %a{:href => "http://demo.opencart.com/index.php?route=product/product&amp;product_id=40"} iPhone
-                          %td.text-right x 1
-                          %td.text-right 96.66€
+                            = link_to product.name, product_path(product)
+                          %td.text-right
+                            x 
+                            = product.quantity
+                          %td.text-right
+                            = product.amount
                           %td.text-center
-                            %button.btn.btn-danger.btn-xs{:onclick => "cart.remove('YToxOntzOjEwOiJwcm9kdWN0X2lkIjtpOjQwO30=');", :title => "Remove", :type => "button"}
+                            %button.btn.btn-danger.btn-xs
                               %i.fa.fa-times
                   %li
                     %div
@@ -99,20 +100,21 @@
                           %tr
                             %td.text-right
                               %strong Sub-Total
-                            %td.text-right 784.60€
+                            %td.text-right
+                              = @total_amount
                           %tr
                             %td.text-right
                               %strong Total
-                            %td.text-right 784.60€
+                            %td.text-right
+                              = @total_amount
                       %p.text-right
-                        %a{:href => "http://demo.opencart.com/index.php?route=checkout/cart"}
-                          %strong
-                            %i.fa.fa-shopping-cart
-                            View Cart
-                        %a{:href => "http://demo.opencart.com/index.php?route=checkout/checkout"}
-                          %strong
-                            %i.fa.fa-share
-                            Checkout
+                        %strong
+                          %a.fa.fa-shopping-cart
+                            = link_to "Shopping Cart  ", cart_items_path
+                        &nbsp;&nbsp;&nbsp;
+                        %strong
+                          %a.fa.fa-share
+                            = link_to "Checkout", cart_items_path
     .container
       %nav#menu.navbar
         .navbar-header
