@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   has_many :addresses
   has_many :cart_items
   has_many :products, through: :cart_items
+  has_many :user_orders
 
   validates_presence_of :fname, :lname, :phone
   validates :fname, length: { minimum: 3, too_short: "should be atleast 3 characters long."}, format: { with: /[a-zA-Z]+/ }

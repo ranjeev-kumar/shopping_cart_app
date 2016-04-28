@@ -1,0 +1,28 @@
+.row
+  .col-sm-1
+  .col-sm-9#content
+    .row
+      -@addresses.each do |address|
+        .col-sm-4
+          .panel.panel-primary
+            .panel-heading
+              %h4 Address
+            .panel-body
+              %p
+                %b
+                  = "#{current_user.fname} #{current_user.lname}"
+              %p
+                = "#{address.address_1} #{address.address_2}"
+                %br
+                = "#{address.city}"
+                %br
+                = "#{address.state}"
+                %br
+                = "#{address.country}"
+                %br
+                = "#{address.zipcode}"
+              = link_to 'Update', edit_address_path(address), class: 'btn btn-primary'
+              = link_to 'Delete', address_path(address), class: 'btn btn-danger', method: :delete, data: { confirm: 'Are You Sure?'}
+    .buttons
+      = link_to 'Add New Address', new_address_path, class: 'btn btn-primary pull-left'
+      = link_to 'Next', user_orders_path, class: 'btn btn-default pull-right'
