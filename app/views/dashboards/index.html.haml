@@ -5,8 +5,10 @@
       -@products.each do |product|
         .col-lg-3.col-md-3.col-sm-6.col-xs-12
           .product-thumb.transition
-            .image
-              = link_to image_tag("logo.png", height: 100, width: 200), product_path(product)
+            - product.images.each do |img|
+              -if img.main
+                .image
+                  = link_to image_tag("#{img.avatar.url}", height: 100, width: 200), product_path(product)
             .caption
               %h4
                 = product.name
@@ -16,7 +18,7 @@
                 Price : Rs. 
                 = product.price
             .button-group
-              %button{:onclick => "cart.add('43');", :type => "button"}
+              %button
                 %i.fa.fa-shopping-cart
                 %span.hidden-xs.hidden-sm.hidden-md
                   = link_to 'ADD TO CART', add_product_cart_item_path(product), method: :post

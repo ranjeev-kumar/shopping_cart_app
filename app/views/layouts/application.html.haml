@@ -8,8 +8,7 @@
   %body.account-login
     %nav#top
       .container
-        .pull-left
-          
+        .pull-left   
         #top-links.nav.pull-right
           %ul.list-inline
             %li
@@ -91,8 +90,7 @@
                           %td.text-right
                             = product.amount
                           %td.text-center
-                            %button.btn.btn-danger.btn-xs
-                              %i.fa.fa-times
+                            = link_to '', cart_item_path(product), method: :delete, data: { confirm: 'Are You Sure?'}, type: "button", class: 'btn btn-danger fa fa-times-circle'
                   %li
                     %div
                       %table.table.table-bordered

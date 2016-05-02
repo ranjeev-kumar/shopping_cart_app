@@ -8,23 +8,25 @@
       = devise_error_messages!
       %fieldset#account
         %legend Your Personal Details
-        .form-group.required{:style => "display: none;"}
-          
-        .form-group.required
-          = f.input :fname, autofocus: true, input_class:'form-control', placeholder:'First Name'
-        .form-group.required
-          = f.input :lname, input_class:'form-control', placeholder:'Last Name'
-        .form-group.required
-          = f.input :email, class:'form-control', id:'inputEmail3', placeholder:'Email'
-        .form-group.required
-          = f.input :phone, class:'form-control', id:'inputEmail3', placeholder:'Mobile no.'
+        .col-sm-1
+        .col-sm-10
+          .form-group
+            = f.input :fname, autofocus: true, input_class:'form-control', placeholder:'First Name'
+          .form-group
+            = f.input :lname, input_class:'form-control', placeholder:'Last Name'
+          .form-group
+            = f.input :email, class:'form-control', id:'inputEmail3', placeholder:'Email'
+          .form-group
+            = f.input :phone, class:'form-control', id:'inputEmail3', placeholder:'Mobile no.'
       
       %fieldset
         %legend Your Password
-        .form-group
-          = f.input :password, autocomplete: "off", class:'form-control', hint: "Password should be 8 characters long.", placeholder:'Password'
-        .form-group
-          = f.input :password_confirmation, autocomplete: "off", class:'form-control', placeholder:'Confirm Password', label: "Confirm Password"
+        .col-sm-1
+        .col-sm-10
+          .form-group
+            = f.input :password, autocomplete: "off", class:'form-control', hint: "Password should be 8 characters long.", placeholder:'Password'
+          .form-group
+            = f.input :password_confirmation, autocomplete: "off", class:'form-control', placeholder:'Confirm Password', label: "Confirm Password"
       
       .button.pull-right
         = f.button :submit, 'Sign Up', class: 'btn btn-primary'

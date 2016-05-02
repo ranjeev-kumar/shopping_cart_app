@@ -1,0 +1,39 @@
+.row
+  .col-sm-1
+  .col-sm-9#content
+    %h1 Order Summary
+    .table-responsive
+      %table.table.table-bordered
+        %thead
+          %tr
+            %td.text-center Product Name
+            %td.text-center Quantity
+            %td.text-center Total
+        %tbody
+          -@cart_products.each do |product|
+            %tr
+              %td.text-left
+                = link_to product.name, product_path(product)
+              %td.text-center
+                = product.quantity
+              %td.text-right
+                = product.amount
+          %tr
+            %td{colspan: "2"}
+              %strong Sub-Total:
+            %td.text-right
+              %strong
+                = @total_amount
+          %tr
+            %td{colspan: "2"}
+              %strong Total:
+            %td.text-right
+              %strong
+                = @total_amount
+    .row
+      = render 'addresses/index'
+    .buttons
+      .pull-left
+        = link_to 'Continue Shopping', dashboards_path, type: 'button', class: 'btn btn-default'
+      .pull-right
+        = link_to 'Payment', clear_cart_cart_items_path, type: 'button', class: 'btn btn-primary'

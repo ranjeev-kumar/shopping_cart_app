@@ -1,0 +1,23 @@
+= simple_form_for @address do |f|
+  .form-group
+    - if @address.errors.any?
+      #error_explanation
+        %h3
+          = pluralize(@address.errors.count, "error")
+          Prohibited this Address form being saved:
+        %ul
+          - @address.errors.full_messages.each do |msg|
+            %li= msg
+  .form-group
+    = f.input :address_1, class: 'form-controls datepicker', placeholder: 'Address line 1'
+  .form-group
+    = f.input :address_2, class: 'form-controls datepicker', placeholder: 'Address line 2'
+  .form-group
+    = f.input :city, placeholder: "City."
+  .form-group
+    = f.input :state, placeholder: "State."
+  .form-group
+    = f.input :country, collection: ["India"], as: :select, include_blank: 'Select a country'
+  .form-group
+    = f.input :zipcode, placeholder: "Zipcode."
+  = f.button :submit, 'Submit', class: 'btn btn-default'

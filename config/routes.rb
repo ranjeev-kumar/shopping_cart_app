@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   get 'dashboards/index'
 
   devise_for :admins
@@ -15,7 +16,8 @@ Rails.application.routes.draw do
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 
-  resources :admins, :users, :dashboards, :products, :categories
+  resources :admins, :users, :dashboards, :products, :categories, :addresses
+  resources :order_details
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
 
@@ -24,10 +26,15 @@ Rails.application.routes.draw do
       member do
         post 'add_product'
       end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
+      collection do
+        get 'clear_cart'
+      end
+    end
+
+    resources :user_orders do 
+      collection do
+        get 'confirm_order'
+      end
     end
 
   # Example resource route with sub-resources:

@@ -152,10 +152,9 @@ ActiveRecord::Schema.define(version: 20160422144625) do
   end
 
   create_table "user_orders", force: :cascade do |t|
-    t.integer  "quantity",                                     default: 0
-    t.decimal  "total_amount",        precision: 12, scale: 2
-    t.decimal  "shipping_carge",      precision: 12, scale: 2
-    t.string   "status",                                       default: "pending"
+    t.decimal  "total_amount",        precision: 12, scale: 2, default: 0.0
+    t.decimal  "shipping_charge",     precision: 12, scale: 2, default: 0.0
+    t.string   "status",                                       default: "Pending"
     t.integer  "billing_address_id"
     t.integer  "shipping_address_id"
     t.integer  "user_id"

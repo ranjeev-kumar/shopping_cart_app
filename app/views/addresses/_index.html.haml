@@ -1,0 +1,30 @@
+.row
+  .col-sm-9#content
+    - if @addresses.present?
+      -@addresses.each do |address|
+        .col-sm-4
+          .panel.panel-primary
+            .panel-heading
+              = link_to address_path(address), method: :delete, data: { confirm: 'Are You Sure?'}, class: 'close' do
+                %i.glyphicon.glyphicon-remove
+              = link_to edit_address_path(address), class: 'close' do
+                %i.glyphicon.glyphicon-edit
+              %h4 Address
+            .panel-body
+              %p
+                %b
+                  = "#{current_user.fname} #{current_user.lname}"
+              %p
+                = "#{address.address_1} #{address.address_2}"
+                %br
+                = "#{address.city}"
+                %br
+                = "#{address.state}"
+                %br
+                = "#{address.country}"
+                %br
+                = "#{address.zipcode}"
+              = link_to confirm_order_user_orders_path(:address=> address.id), class: 'close pull-left' do
+                %i.glyphicon.glyphicon-plus Add Address
+  .col-sm-1
+    = link_to 'Add New Address', new_address_path, class: 'btn btn-primary pull-left'

@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
   end
 
   def categories_list
-    @categories = Category.where(category_id: nil)
+    @categories = Category.where(category_id: nil).order('id ASC')
   end
 
   def set_cart_items

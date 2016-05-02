@@ -6,4 +6,7 @@ class AttributeValue < ActiveRecord::Base
   has_many :product_attributes, through: :product_attribute_associations
   belongs_to :product_attribute
 
+  # Validations
+  validates_presence_of :value, :status
+
 end

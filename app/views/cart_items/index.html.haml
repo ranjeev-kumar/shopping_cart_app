@@ -9,7 +9,6 @@
             %tr
               %td.text-center Image
               %td.text-left Product Name
-              %td.text-left Model
               %td.text-left Quantity
               %td.text-right Unit Price
               %td.text-right Total
@@ -20,10 +19,6 @@
                 = link_to image_tag("logo.png", height: 100, width: 200), product_path(product)
               %td.text-left
                 = link_to product.name, product_path(product)
-                %span.text-danger ***
-                %br
-                  %small Reward Points: 600
-              %td.text-left Product 16
               %td.text-left
                 .input-group.btn-block{:style => "max-width: 130px;"}
                   %input.form-control{id: "#{product.id}", size: "1", type: "text", value: "#{product.quantity}"}
@@ -57,4 +52,4 @@
         .pull-left
           = link_to 'Continue Shopping', dashboards_path, type: 'button', class: 'btn btn-default'
         .pull-right
-          = link_to 'Place Order', dashboards_path, type: 'button', class: 'btn btn-primary'
+          = link_to 'Place Order', user_orders_path, type: 'button', class: 'btn btn-primary'

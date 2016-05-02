@@ -3,21 +3,15 @@
     .row
       .col-sm-8
         %ul.thumbnails
-          %li
-            %a.thumbnail{:input => "http://demo.opencart.com/image/cache/catalog/demo/macbook_1-500x500.jpg", :title => "MacBook"}
-              %img{:alt => "MacBook", :src => "http://demo.opencart.com/image/cache/catalog/demo/macbook_1-228x228.jpg", :title => "MacBook"}
-          %li.image-additional
-            %a.thumbnail{:input => "http://demo.opencart.com/image/cache/catalog/demo/macbook_5-500x500.jpg", :title => "MacBook"}
-              %img{:alt => "MacBook", :src => "http://demo.opencart.com/image/cache/catalog/demo/macbook_5-74x74.jpg", :title => "MacBook"}
-          %li.image-additional
-            %a.thumbnail{:input => "http://demo.opencart.com/image/cache/catalog/demo/macbook_4-500x500.jpg", :title => "MacBook"}
-              %img{:alt => "MacBook", :src => "http://demo.opencart.com/image/cache/catalog/demo/macbook_4-74x74.jpg", :title => "MacBook"}
-          %li.image-additional
-            %a.thumbnail{:input => "http://demo.opencart.com/image/cache/catalog/demo/macbook_2-500x500.jpg", :title => "MacBook"}
-              %img{:alt => "MacBook", :src => "http://demo.opencart.com/image/cache/catalog/demo/macbook_2-74x74.jpg", :title => "MacBook"}
-          %li.image-additional
-            %a.thumbnail{:input => "http://demo.opencart.com/image/cache/catalog/demo/macbook_3-500x500.jpg", :title => "MacBook"}
-              %img{:alt => "MacBook", :src => "http://demo.opencart.com/image/cache/catalog/demo/macbook_3-74x74.jpg", :title => "MacBook"}
+          -@product.images.each do |img|
+            -if img.main
+              %li
+                .thumbnail
+                  = link_to image_tag("#{img.avatar.url}", height: 100, width: 200), product_path(@product)
+            -if img.main
+              %li.image-additional
+                .thumbnail
+                  = link_to image_tag("#{img.avatar.url}"), product_path(@product)
         %ul.nav.nav-tabs
           %li.active
             %a{"data-toggle" => "tab", :input => "#tab-description"} Description
@@ -52,7 +46,8 @@
             %input#input-quantity.form-control{:name => "quantity", :size => "2", :type => "text", :value => "1"}
               %input{:name => "product_id", :type => "hidden", :value => "43"}
                 %br
-                  %button#button-cart.btn.btn-primary.btn-lg.btn-block{"data-loading-text" => "Loading...", :type => "button"} Add to Cart
+                  #button-cart
+                    = link_to 'ADD TO CART', add_product_cart_item_path(@product), method: :post, class: 'btn btn-primary btn-lg btn-block'
         .rating
           %p
             %span.fa.fa-stack

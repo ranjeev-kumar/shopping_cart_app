@@ -5,11 +5,11 @@ class CartItemsController < ApplicationController
 
   # Actions
   def index
-    if user_signed_in?
-      @cart_products = current_user.cart_items.joins(:product).select('products.id, products.name, cart_items.quantity, cart_items.quantity * products.price as amount, products.price')
-    else
-      @cart_products = nil
-    end
+    @user_order = UserOrder.new
+    @order_detail = OrderDetail.new
+  end
+
+  def show
   end
 
   def add_product
@@ -24,11 +24,17 @@ class CartItemsController < ApplicationController
   def destroy
     @item = CartItem.find_by(product_id: params[:id])
     if @item.destroy
-      flash[:alert] = "Product removed sucessfully!"
+      flash[:notice] = "Product removed sucessfully!"
     else
       flash[:alert] = "Something went wrong, Try again!"
     end
     redirect_to cart_items_path
+  end
+
+  def clear_cart
+    current_user.cart_items.destroy_all
+    flash[:notice] = "make payment"
+    redirect_to dashboards_path
   end
 
   private

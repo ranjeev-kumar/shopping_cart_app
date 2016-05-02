@@ -5,4 +5,8 @@ class Category < ActiveRecord::Base
   belongs_to :category, class_name: "Category"
   has_and_belongs_to_many :products
 
+  # Validations
+  validates_presence_of :name
+  validates :name, length: { in: 2..30}
+
 end

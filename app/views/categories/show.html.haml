@@ -8,8 +8,10 @@
         -@products.each do |product|
           .product-layout.product-grid.col-lg-4.col-md-4.col-sm-6.col-xs-12
             .product-thumb
-              .image
-                = link_to image_tag("logo.png", height: 200, width: 200), product_path(product)
+              - product.images.each do |img|
+                -if img.main
+                  .image
+                    = link_to image_tag("#{img.avatar.url}", height: 120, width: 200), product_path(product)
               .div
                 .caption
                   %h4

@@ -11,8 +11,10 @@ class Product < ActiveRecord::Base
 
   # Validations
   validates_presence_of :name, :description, :price
-  validates :name, length: { minimum: 3, too_short: "should be atleast 3 characters long."}
-  validates :name, length: { maximum: 255, too_short: "should be atmost 255 characters long."}
+  validates :name, length: { in: 3..30}
+  validates :description, length: { in: 10..255}
+  validates :price, format: { with: /\d+(\.\d{1,2})?/}
+  
 
   # Scopes
   scope :category_products, ->(category_id) { joins(:categories).where('categories.category_id = ?', category_id) }
