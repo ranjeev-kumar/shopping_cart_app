@@ -32,7 +32,7 @@
       %p There are no products in your cart.
       .buttons
         .pull-right
-          = link_to 'Continue Shopping', dashboards_path, input_class: 'btn btn-primary'
+          = link_to 'Continue Shopping', '/', input_class: 'btn btn-primary'
     - if @cart_products.present?
       .row
         .col-sm-4.col-sm-offset-8
@@ -50,6 +50,6 @@
                   = @total_amount
       .buttons
         .pull-left
-          = link_to 'Continue Shopping', dashboards_path, type: 'button', class: 'btn btn-default'
+          = link_to 'Continue Shopping', '/', type: 'button', class: 'btn btn-default'
         .pull-right
           = link_to 'Place Order', user_orders_path, type: 'button', class: 'btn btn-primary'

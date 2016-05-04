@@ -7,17 +7,10 @@ class ApplicationController < ActionController::Base
   before_action :configure_sanitized_params, if: :devise_controller?
   before_action :categories_list
   before_action :set_cart_items
+  before_action :wish_list_counts
 
   def configure_sanitized_params
-    devise_parameter_sanitizer.for(:sign_up) {|u| u.permit(:fname, :lname, :phone, :email, :password)}
-  end
-
-  def after_sign_in_path_for(resource)
-    dashboards_path
-  end
-
-  def after_sign_out_path_for(resource)
-    dashboards_path
+    devise_parameter_sanitizer.for(:sign_up) {|u| u.permit(:fname, :lname, :phone, :status, :email, :password)}
   end
 
   def categories_list
@@ -30,6 +23,14 @@ class ApplicationController < ActionController::Base
       @total_amount = @cart_products.map(&:amount).sum
     else
       @cart_products = nil
+    end
+  end
+
+  def wish_list_counts
+    if user_signed_in?
+      @list_count = current_user.wish_lists.count
+    else
+      @list_count = nil
     end
   end
 end

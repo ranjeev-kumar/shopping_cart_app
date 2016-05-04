@@ -22,3 +22,11 @@
 
 .glyphicon-remove {color: red;}
 .glyphicon-edit {color: white;}
+
+.false {
+  color: red;
+}
+
+.true{
+  color: green;
+}

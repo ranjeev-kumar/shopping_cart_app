@@ -18,7 +18,7 @@ class CartItemsController < ApplicationController
     else
       flash[:alert] = "Something Went wrong!"
     end
-    redirect_to dashboards_path  
+    redirect_to '/'  
   end
 
   def destroy
@@ -34,7 +34,7 @@ class CartItemsController < ApplicationController
   def clear_cart
     current_user.cart_items.destroy_all
     flash[:notice] = "make payment"
-    redirect_to dashboards_path
+    redirect_to '/'
   end
 
   private

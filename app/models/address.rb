@@ -2,7 +2,7 @@ class Address < ActiveRecord::Base
   
   # Association
   belongs_to :user
-  has_many :user_orders
+  has_many :user_orders, dependent: :destroy
 
   # Validations
   validates_presence_of :address_1, :city, :state, :country, :zipcode

@@ -3,14 +3,42 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+  devise :omniauthable, :omniauth_providers => [:facebook]
 
-  has_many :addresses
+  # Associations
+  has_many :addresses, dependent: :destroy
   has_many :cart_items
   has_many :products, through: :cart_items
-  has_many :user_orders
+  has_many :user_orders, dependent: :destroy
+  has_many :wish_lists
 
-  validates_presence_of :fname, :lname, :phone
-  validates :fname, length: { minimum: 3, too_short: "should be atleast 3 characters long."}, format: { with: /[a-zA-Z]+/ }
-  validates :lname, length: { minimum: 3, too_short: "should be atleast 3 characters long."}, format: { with: /[a-zA-Z]+/ }
-  validates :phone, length: { minimum: 10, too_short: "should be atleast 10 digits long."}, format: { with: /\A[7-9]{1}[0-9]+/ }
+  # validates_presence_of :fname
+  # validates :fname, length: { minimum: 3, too_short: "should be atleast 3 characters long."}, format: { with: /[a-zA-Z]+/ }
+  # validates :phone, length: { minimum: 10, too_short: "should be atleast 10 digits long."}, format: { with: /\A[7-9]{1}[0-9]+/ }
+
+  def self.from_omniauth(auth)
+    user = where(provider: auth.provider, uid: auth.uid).first_or_initialize# do |user|
+    binding.pry
+      user.provider = auth.provider
+      user.uid = auth.uid
+      user.email = auth.info.email
+      user.password = Devise.friendly_token[0,20]
+      user.fname = auth.info.name   # user model has a fname
+      # image = auth.info.image # assuming the user model has an image
+    # end
+    user.save
+    user
+  end
+
+  def self.new_with_session(params, session)
+    super.tap do |user|
+      if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
+        user.email = data["email"] if user.email.blank?
+      end
+    end
+  end
+
+  def facebook_profile_image(size)
+    "http://graph.facebook.com/#{self.uid}/picture?type=#{size}"
+  end
 end

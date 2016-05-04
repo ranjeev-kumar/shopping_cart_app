@@ -3,10 +3,11 @@ class Product < ActiveRecord::Base
   # Assosiations
   has_many :cart_items
   has_many :users, through: :cart_items
-  has_many :images
-  has_many :product_attribute_associations
+  has_many :images, dependent: :destroy
+  has_many :product_attribute_associations, dependent: :destroy
   has_many :product_attributes, through: :product_attribute_associations
   has_many :attribute_values, through: :product_attribute_associations
+  has_many :wish_lists
   has_and_belongs_to_many :categories
 
   # Validations

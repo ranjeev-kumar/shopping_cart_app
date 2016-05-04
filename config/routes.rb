@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get 'dashboards/index'
 
   devise_for :admins
-  devise_for :users
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 
   resources :admins, :users, :dashboards, :products, :categories, :addresses
-  resources :order_details
+  resources :order_details, :wish_lists
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
 

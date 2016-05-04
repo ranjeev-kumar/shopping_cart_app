@@ -27,6 +27,13 @@
             = f.input :password, autocomplete: "off", class:'form-control', hint: "Password should be 8 characters long.", placeholder:'Password'
           .form-group
             = f.input :password_confirmation, autocomplete: "off", class:'form-control', placeholder:'Confirm Password', label: "Confirm Password"
+      %fieldset
+        %legend Newsletter
+        .col-sm-1
+        .col-sm-10
+          .form-group
+            = f.input :newsletter, class:'form-control'
+            %p Tick for subscribe the newsletter.
       
       .button.pull-right
         = f.button :submit, 'Sign Up', class: 'btn btn-primary'

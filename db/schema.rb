@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160422144625) do
+ActiveRecord::Schema.define(version: 20160504102534) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -92,14 +92,24 @@ ActiveRecord::Schema.define(version: 20160422144625) do
   add_index "categories_products", ["category_id", "product_id"], name: "index_categories_products_on_category_id_and_product_id", using: :btree
   add_index "categories_products", ["product_id", "category_id"], name: "index_categories_products_on_product_id_and_category_id", using: :btree
 
+  create_table "coupons", force: :cascade do |t|
+    t.string   "code"
+    t.decimal  "price",          precision: 12, scale: 2
+    t.integer  "created_by_id"
+    t.integer  "modified_by_id"
+    t.boolean  "status",                                  default: false
+    t.integer  "no_of_uses"
+    t.datetime "created_at",                                              null: false
+    t.datetime "updated_at",                                              null: false
+  end
+
   create_table "images", force: :cascade do |t|
     t.string   "name"
-    t.string   "main",       default: "false"
-    t.integer  "image_size"
     t.integer  "product_id"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.string   "avatar"
+    t.boolean  "main",       default: false
   end
 
   add_index "images", ["product_id"], name: "index_images_on_product_id", using: :btree
@@ -145,10 +155,10 @@ ActiveRecord::Schema.define(version: 20160422144625) do
   create_table "products", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
-    t.decimal  "price",       precision: 6, scale: 4
     t.boolean  "status",                              default: false
     t.datetime "created_at",                                          null: false
     t.datetime "updated_at",                                          null: false
+    t.decimal  "price",       precision: 8, scale: 2
   end
 
   create_table "user_orders", force: :cascade do |t|
@@ -185,10 +195,23 @@ ActiveRecord::Schema.define(version: 20160422144625) do
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
     t.string   "phone"
+    t.string   "provider"
+    t.string   "uid"
+    t.boolean  "newsletter",             default: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "wish_lists", force: :cascade do |t|
+    t.integer  "product_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "wish_lists", ["product_id"], name: "index_wish_lists_on_product_id", using: :btree
+  add_index "wish_lists", ["user_id"], name: "index_wish_lists_on_user_id", using: :btree
 
   add_foreign_key "addresses", "users"
 end

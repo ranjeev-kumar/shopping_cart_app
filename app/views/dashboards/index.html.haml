@@ -22,9 +22,9 @@
                 %i.fa.fa-shopping-cart
                 %span.hidden-xs.hidden-sm.hidden-md
                   = link_to 'ADD TO CART', add_product_cart_item_path(product), method: :post
-              %button{"data-original-title" => "Add to Wish List", "data-toggle" => "tooltip", :onclick => "wishlist.add('43');", :title => "", :type => "button"}
-                %i.fa.fa-heart
-              %button{"data-original-title" => "Compare this Product", "data-toggle" => "tooltip", :onclick => "compare.add('43');", :title => "", :type => "button"}
+              %button
+                = link_to '', wish_lists_path(:product=>product.id), method: :post, class: "fa fa-heart"
+              %button
                 %i.fa.fa-exchange
 .row
   .col-sm-6.text-left

@@ -14,40 +14,68 @@
                   = link_to image_tag("#{img.avatar.url}"), product_path(@product)
         %ul.nav.nav-tabs
           %li.active
-            %a{"data-toggle" => "tab", :input => "#tab-description"} Description
+            %a{"data-toggle" => "tab", :href => "#tab-description"} Description
           %li
-            %a{"data-toggle" => "tab", :input => "#tab-specification"} Specification
-          %li
-            %a{"data-toggle" => "tab", :input => "#tab-review"} Reviews (0)
+            %a{"data-toggle" => "tab", :href => "#tab-secification"} Specification
+        .tab-content
+          .tab-pane.active#tab-description
+            %div
+              %p
+                %b 
+                  = @product.description
+          .tab-pane#tab-secification
+            %div
+              %table.table.table-bordered
+                %thead
+                  %tr
+                    %td
+                      %b Attribute
+                    %td
+                      %b Value
+                - @product.product_attributes.each do |attribute|
+                  %tbody
+                    %tr
+                      %td
+                        %b
+                          = attribute.name
+                      - attribute.attribute_values.each do |attribute_value|
+                        %td
+                          = attribute_value.value
       .col-sm-4
         .btn-group
-          %button.btn.btn-default{"data-original-title" => "Add to Wish List", "data-toggle" => "tooltip", :title => "", :type => "button"}
-            %i.fa.fa-heart
-          %button.btn.btn-default{"data-original-title" => "Compare this Product", "data-toggle" => "tooltip", :title => "", :type => "button"}
+          %button.btn.btn-default
+            = link_to '', wish_lists_path(@product), method: :post, class: "fa fa-heart"
+          %button.btn.btn-default
             %i.fa.fa-exchange
         %h1 
           = @product.name
-        %ul.list-unstyled
-          %li
-            Brand:
-            %a{:input => "http://demo.opencart.com/index.php?route=product/manufacturer/info&amp;manufacturer_id=8"} Apple
-          %li 
-            Product Code: 
-            = @product.id
-          %li Reward Points: 600
-          %li Availability: Out Of Stock
-        %ul.list-unstyled
-          %li
-            %h2 
-              = @product.price
+        %table.table
+          %tbody#wishlist-row
+            %tr
+              %td Product Code
+              %td.text-right
+                %b
+                  = @product.id
+            %tr
+              %td Availability
+              -if @product.status
+                %td.text-right
+                  %b.true
+                    In Stock
+              -else
+                %td.text-right
+                  %b.false
+                    Out of Stock
+            %tr
+              %td Price
+              %td.text-right
+                %h3
+                  = @product.price
         #product
           .form-group
-            %label.control-label{:for => "input-quantity"} Qty
-            %input#input-quantity.form-control{:name => "quantity", :size => "2", :type => "text", :value => "1"}
-              %input{:name => "product_id", :type => "hidden", :value => "43"}
-                %br
-                  #button-cart
-                    = link_to 'ADD TO CART', add_product_cart_item_path(@product), method: :post, class: 'btn btn-primary btn-lg btn-block'
+            %br
+            #button-cart
+              = link_to 'ADD TO CART', add_product_cart_item_path(@product), method: :post, class: 'btn btn-primary btn-lg btn-block'
         .rating
           %p
             %span.fa.fa-stack

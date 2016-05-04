@@ -41,6 +41,9 @@ gem 'carrierwave'
 gem 'will_paginate', '~> 3.0.6'
 # Rails admin
 gem 'rails_admin'
+# Facebook login
+gem 'omniauth'
+gem 'omniauth-facebook'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

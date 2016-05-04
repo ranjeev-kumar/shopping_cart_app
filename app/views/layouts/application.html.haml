@@ -43,21 +43,24 @@
                     = link_to 'Sign Out', destroy_user_session_path, method: :delete
             %li
               %i.fa.fa-heart
-              %span.hidden-xs.hidden-sm.hidden-md Wish List (0)
-            %li
-              %i.fa.fa-shopping-cart
               %span.hidden-xs.hidden-sm.hidden-md
-                = link_to "Shopping Cart", cart_items_path
-            %li
-              %i.fa.fa-share
-              %span.hidden-xs.hidden-sm.hidden-md
-                = link_to "Checkout", cart_items_path
+                = link_to "Wish List (#{@list_count})", wish_lists_path
+                
+            - if @cart_products.present?
+              %li
+                %i.fa.fa-shopping-cart
+                %span.hidden-xs.hidden-sm.hidden-md
+                  = link_to "Shopping Cart", cart_items_path
+              %li
+                %i.fa.fa-share
+                %span.hidden-xs.hidden-sm.hidden-md
+                  = link_to "Checkout", cart_items_path
     %header
       .container
         .row
           .col-sm-4
             #logo
-              = link_to image_tag("logo.png"), dashboards_path
+              = link_to image_tag("logo.png"), '/'
           .col-sm-5
             #search.input-group
               %input.form-control.input-lg{name: "search", placeholder: "Search", type: "text", value: ""}
