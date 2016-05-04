@@ -2,7 +2,7 @@ class CreateCoupons < ActiveRecord::Migration
   def change
     create_table :coupons do |t|
       t.string :code
-      t.decimal :price, precision: 12, scale: 2
+      t.decimal :dicount_of, precision: 12, scale: 2
       t.references :created_by, references: :admins
       t.references :modified_by, references: :admins
       t.boolean :status, default: :false

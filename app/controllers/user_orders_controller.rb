@@ -14,6 +14,7 @@ class UserOrdersController < ApplicationController
     end
     user_order.order_details = order_details
     if user_order.save
+      NotificationMailer.order_status_email(user_order, current_user).deliver_now
       flash[:notice] = "Address added successfully!"
       redirect_to user_orders_path
     else

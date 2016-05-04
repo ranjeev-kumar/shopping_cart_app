@@ -94,7 +94,7 @@ ActiveRecord::Schema.define(version: 20160504102534) do
 
   create_table "coupons", force: :cascade do |t|
     t.string   "code"
-    t.decimal  "price",          precision: 12, scale: 2
+    t.decimal  "dicount_of",     precision: 12, scale: 2
     t.integer  "created_by_id"
     t.integer  "modified_by_id"
     t.boolean  "status",                                  default: false

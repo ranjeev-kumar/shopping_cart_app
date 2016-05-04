@@ -1,0 +1,30 @@
+%table.table.table-bordered
+  %tr
+    %td Thank you for you Order.
+    %td Order Question?
+  %tr{colspan: "2"}
+    %td.text-center
+      Order No :
+      = @order.id
+      %table.table.table-bordered
+        %tr
+          %td Status
+          %td
+            =@order.status
+
+  %tr{colspan: "2"}
+    %td.text-left
+      Bill To:
+      %table.table.table-bordered
+        %tr
+          %td Shipping Address
+          %td
+            / = "#{@user.address_1}, #{@user.address_2}, #{@user.city}, #{@user.state}, #{user.zipcode}"
+        %tr
+          %td Billing Address
+          %td
+            / = "#{@user.address_1}, #{@user.address_2}, #{@user.city}, #{@user.state}, #{user.zipcode}"
+  %tr{colspan: "2"}
+    %td Payment Method :
+
+

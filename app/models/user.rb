@@ -12,6 +12,9 @@ class User < ActiveRecord::Base
   has_many :user_orders, dependent: :destroy
   has_many :wish_lists
 
+  # Callbacks
+  after_create :welcome_user
+
   # validates_presence_of :fname
   # validates :fname, length: { minimum: 3, too_short: "should be atleast 3 characters long."}, format: { with: /[a-zA-Z]+/ }
   # validates :phone, length: { minimum: 10, too_short: "should be atleast 10 digits long."}, format: { with: /\A[7-9]{1}[0-9]+/ }
@@ -41,4 +44,9 @@ class User < ActiveRecord::Base
   def facebook_profile_image(size)
     "http://graph.facebook.com/#{self.uid}/picture?type=#{size}"
   end
+
+  private
+    def welcome_user
+      UserMailer.welcome_email(self).deliver_now
+    end
 end
