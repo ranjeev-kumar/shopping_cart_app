@@ -116,29 +116,31 @@
                         %strong
                           %a.fa.fa-share
                             = link_to "Checkout", cart_items_path
+        .row
+          .col-sm-12
+            %nav#menu.navbar
+              .navbar-header
+                %span#category.visible-xs Categories
+                %button.btn.btn-navbar.navbar-toggle{"data-target" => ".navbar-ex1-collapse", "data-toggle" => "collapse", :type => "button"}
+                  %i.fa.fa-bars
+              .collapse.navbar-collapse.navbar-ex1-collapse
+                %ul.nav.navbar-nav
+                  - @categories.each do |category|
+                    %li.dropdown
+                      %a.dropdown-toggle{"data-toggle" => "dropdown"} 
+                        = category.name
+                      .dropdown-menu
+                        .dropdown-inner
+                          %ul.list-unstyled
+                            - category.subcategories.each do |subcat|
+                              %li
+                                = link_to subcat.name, category_path(subcat)
+                        .see-all
+                          = link_to category.name, category_path(category)
     .container
-      %nav#menu.navbar
-        .navbar-header
-          %span#category.visible-xs Categories
-          %button.btn.btn-navbar.navbar-toggle{"data-target" => ".navbar-ex1-collapse", "data-toggle" => "collapse", :type => "button"}
-            %i.fa.fa-bars
-        .collapse.navbar-collapse.navbar-ex1-collapse
-          %ul.nav.navbar-nav
-            - @categories.each do |category|
-              %li.dropdown
-                %a.dropdown-toggle{"data-toggle" => "dropdown"} 
-                  = category.name
-                .dropdown-menu
-                  .dropdown-inner
-                    %ul.list-unstyled
-                      - category.subcategories.each do |subcat|
-                        %li
-                          = link_to subcat.name, category_path(subcat)
-                  .see-all
-                    = link_to category.name, category_path(category)
-    .container
-      %p.notice= notice
-      %p.alert= alert
+      .alert.notice
+        = notice
+        = alert
       = yield
     %footer
       .container

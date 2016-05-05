@@ -1,6 +1,5 @@
 .row
-  .col-sm-1
-  .col-sm-9#content
+  .col-sm-12#content
     %h1 Shopping Cart
     - if @cart_products.present?
       .table-responsive
@@ -28,23 +27,21 @@
                 = product.price
               %td.text-right
                 = product.amount
-    - else
-      %p There are no products in your cart.
-      .buttons
-        .pull-right
-          = link_to 'Continue Shopping', '/', input_class: 'btn btn-primary'
-    - if @cart_products.present?
       .row
         .col-sm-4.col-sm-offset-8
           %table.table.table-bordered
             %tbody
               %tr
-                %td.text-right
+                %td.text-left
                   %strong Sub-Total:
                 %td.text-right
                   = @total_amount
               %tr
-                %td.text-right
+                %td.text-left
+                  %strong Discount
+                %td.text-right 0.0
+              %tr
+                %td.text-left
                   %strong Total:
                 %td.text-right
                   = @total_amount
@@ -53,3 +50,10 @@
           = link_to 'Continue Shopping', '/', type: 'button', class: 'btn btn-default'
         .pull-right
           = link_to 'Place Order', user_orders_path, type: 'button', class: 'btn btn-primary'
+    - else
+      %p There are no products in your cart.
+      .buttons
+        .pull-right
+          = link_to 'Continue Shopping', '/', input_class: 'btn btn-primary'
+
+      

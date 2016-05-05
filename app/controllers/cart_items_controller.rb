@@ -33,8 +33,7 @@ class CartItemsController < ApplicationController
 
   def clear_cart
     current_user.cart_items.destroy_all
-    flash[:notice] = "make payment"
-    redirect_to '/'
+    redirect_to payment_gateways_path
   end
 
   private

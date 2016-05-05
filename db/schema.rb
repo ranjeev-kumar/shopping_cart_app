@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160504102534) do
+ActiveRecord::Schema.define(version: 20160505104239) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -94,13 +94,13 @@ ActiveRecord::Schema.define(version: 20160504102534) do
 
   create_table "coupons", force: :cascade do |t|
     t.string   "code"
-    t.decimal  "dicount_of",     precision: 12, scale: 2
     t.integer  "created_by_id"
     t.integer  "modified_by_id"
-    t.boolean  "status",                                  default: false
+    t.boolean  "status",                                 default: false
     t.integer  "no_of_uses"
-    t.datetime "created_at",                                              null: false
-    t.datetime "updated_at",                                              null: false
+    t.datetime "created_at",                                             null: false
+    t.datetime "updated_at",                                             null: false
+    t.decimal  "discount_of",    precision: 5, scale: 2
   end
 
   create_table "images", force: :cascade do |t|
@@ -160,6 +160,16 @@ ActiveRecord::Schema.define(version: 20160504102534) do
     t.datetime "updated_at",                                          null: false
     t.decimal  "price",       precision: 8, scale: 2
   end
+
+  create_table "used_coupons", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "coupon_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "used_coupons", ["coupon_id"], name: "index_used_coupons_on_coupon_id", using: :btree
+  add_index "used_coupons", ["user_id"], name: "index_used_coupons_on_user_id", using: :btree
 
   create_table "user_orders", force: :cascade do |t|
     t.decimal  "total_amount",        precision: 12, scale: 2, default: 0.0

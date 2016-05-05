@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
   has_many :products, through: :cart_items
   has_many :user_orders, dependent: :destroy
   has_many :wish_lists
+  has_many :used_coupons
+  has_many :coupons, through: :used_coupons
 
   # Callbacks
   after_create :welcome_user

@@ -30,3 +30,12 @@
 .true{
   color: green;
 }
+
+#input-coupon{
+  height: 34px;
+}
+
+hr {
+  border-width: 2px;
+  border-color: lightgray;
+}

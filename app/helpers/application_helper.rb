@@ -7,4 +7,8 @@ module ApplicationHelper
     end
   end
 
+  def coupons_list
+    coupons = Coupon.all.collect {|c| [ c.code, c.id ] }
+  end
+
 end

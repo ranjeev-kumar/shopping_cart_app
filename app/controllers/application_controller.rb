@@ -30,7 +30,7 @@ class ApplicationController < ActionController::Base
     if user_signed_in?
       @list_count = current_user.wish_lists.count
     else
-      @list_count = nil
+      @list_count = 0
     end
   end
 end
