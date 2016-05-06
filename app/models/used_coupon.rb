@@ -1,4 +1,4 @@
 class UsedCoupon < ActiveRecord::Base
   belongs_to :user
-  belongs_to :coupons
+  belongs_to :coupon
 end

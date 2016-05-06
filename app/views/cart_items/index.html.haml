@@ -49,7 +49,7 @@
         .pull-left
           = link_to 'Continue Shopping', '/', type: 'button', class: 'btn btn-default'
         .pull-right
-          = link_to 'Place Order', user_orders_path, type: 'button', class: 'btn btn-primary'
+          = link_to 'Place Order', confirm_order_user_orders_path, type: 'button', class: 'btn btn-primary'
     - else
       %p There are no products in your cart.
       .buttons

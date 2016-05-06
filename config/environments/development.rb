@@ -43,10 +43,10 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
       address:              '206.183.111.214',
-      port:                 587,
-      domain:               'gmail.com',
-      user_name:            'ranjeev.wwindia@gmail.com',
-      password:             'ranjeevk123',
+      port:                 25,
+      domain:               'wwindia.com',
+      user_name:            'ranjeev.kumar@wwindia.com',
+      password:             'ranjeev.123',
       authentication:       'plain',
       openssl_verify_mode:  'none'
 

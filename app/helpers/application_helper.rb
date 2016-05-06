@@ -11,4 +11,8 @@ module ApplicationHelper
     coupons = Coupon.all.collect {|c| [ c.code, c.id ] }
   end
 
+  def email_list
+    emails = User.where(newsletter: :true).collect {|u| [ u.email ] }
+  end
+
 end

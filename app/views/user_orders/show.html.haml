@@ -1,0 +1,62 @@
+.row
+  = render 'addresses/index'
+%hr
+.row
+  .col-sm-1
+  .col-sm-9#content
+    %h1 Order Summary
+    .table-responsive
+      %table.table.table-bordered
+        %thead
+          %tr
+            %td.text-center Product Name
+            %td.text-center Quantity
+            %td.text-center Total
+        %tbody
+          -@cart_products.each do |product|
+            %tr
+              %td.text-left
+                = link_to product.name, product_path(product)
+              %td.text-center
+                = product.quantity
+              %td.text-right
+                = product.amount
+          %tr
+            %td{colspan: "2"}
+              %strong Sub-Total:
+            %td.text-right
+              %strong
+                = @total_amount
+            %tr
+              %td{colspan: "2"}
+                %strong Discount:
+              %td.text-right
+                %strong.discount
+                  = (@total_amount * @discount).ceil
+            %tr
+              %td{colspan: "2"}
+                %strong Total:
+              %td.text-right
+                %strong.total
+                  = @total_amount - (@total_amount * @discount).ceil
+    %h3 Get Discount if you have a discount coupon.
+    .panel-group#acordion
+      .panel.panel-default
+        .panel-heading
+          %h4.panel-title
+            %a.accordion-toggle.collapsed{"data-parent" => "#accordion", "data-toggle" => "collapse", :href => "#collapse-coupon"}
+              Use Coupon Code
+              %i.fa.fa-caret-down
+        .panel-collapse.collapse#collapse-coupon
+          .panel-body
+            = form_tag(apply_discount_user_orders_path, method: :get) do
+              .input-group
+                = select_tag 'coupon_id', options_for_select(coupons_list), include_blank: 'Select a Coupon here...', class:'form-control', id: 'input-coupon'
+                = hidden_field_tag "order_id", params[:id]
+                %span.input-group-btn
+                  = submit_tag "Apply Coupon", class: 'btn btn-primary', id: 'button-coupon'
+    .buttons
+      .pull-left
+        = link_to 'Continue Shopping', '/', type: 'button', class: 'btn btn-default'
+      .pull-right
+        = link_to 'Payment', clear_cart_cart_items_path, type: 'button', class: 'btn btn-primary'

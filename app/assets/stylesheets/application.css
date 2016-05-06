@@ -23,11 +23,11 @@
 .glyphicon-remove {color: red;}
 .glyphicon-edit {color: white;}
 
-.false {
+.false, .discount {
   color: red;
 }
 
-.true{
+.true, .total{
   color: green;
 }
 

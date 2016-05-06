@@ -5,8 +5,6 @@ class CartItemsController < ApplicationController
 
   # Actions
   def index
-    @user_order = UserOrder.new
-    @order_detail = OrderDetail.new
   end
 
   def show

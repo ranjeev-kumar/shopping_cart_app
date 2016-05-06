@@ -22,7 +22,7 @@
             = "#{address.country}"
             %br
             = "#{address.zipcode}"
-          = link_to confirm_order_user_orders_path(:address=> address.id), class: 'close pull-left' do
+          = link_to add_order_address_user_orders_path(:address=> address.id,:order_id=>params[:id]), class: 'close pull-left' do
             %i.glyphicon.glyphicon-plus Add Address
 = link_to 'Add New Address', new_address_path, class: 'btn btn-primary pull-left'           
   
