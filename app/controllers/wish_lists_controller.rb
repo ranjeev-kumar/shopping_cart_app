@@ -20,6 +20,16 @@ class WishListsController < ApplicationController
     redirect_to '/' 
   end
 
+   def destroy
+    @item = WishList.find_by(product_id: params[:id])
+    if @item.destroy
+      flash[:notice] = "Product removed sucessfully from Wish List!"
+    else
+      flash[:alert] = "Something went wrong, Try again!"
+    end
+    redirect_to wish_lists_path
+  end
+
   private
     def check_product_in_wish_list
       if user_signed_in?

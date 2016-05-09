@@ -3,7 +3,7 @@
     .col-sm-3
       .panel.panel-primary
         .panel-heading
-          = link_to address_path(address), method: :delete, data: { confirm: 'Are You Sure?'}, class: 'close' do
+          = link_to address_path(:address=> address.id), method: :delete, data: { confirm: 'Are You Sure?'}, class: 'close' do
             %i.glyphicon.glyphicon-remove
           = link_to edit_address_path(address), class: 'close' do
             %i.glyphicon.glyphicon-edit

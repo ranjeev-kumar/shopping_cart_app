@@ -6,7 +6,7 @@ class UserOrdersController < ApplicationController
   before_action :create_user_order, only: [:confirm_order]
 
   def index
-    
+    @user_orders = current_user.user_orders.paginate(page: params[:page], per_page: 10)
   end
 
   def show

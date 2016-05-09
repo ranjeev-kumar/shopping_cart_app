@@ -1,6 +1,6 @@
 class AddressesController < ApplicationController
 
-  before_action :set_address, only: [:edit, :update, :destroy]
+  before_action :set_address, only: [:edit, :update]
 
   def index
   end
@@ -33,6 +33,8 @@ class AddressesController < ApplicationController
   end
 
   def destroy
+    @address = current_user.addresses.find(params[:address])
+    binding.pry
     if @address.destroy
       flash[:alert] = "Address removed sucessfully!"
     else

@@ -39,3 +39,7 @@ hr {
   border-width: 2px;
   border-color: lightgray;
 }
+
+input[id=button-search] {
+  margin-top: -9px;
+}

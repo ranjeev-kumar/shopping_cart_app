@@ -1,34 +1,40 @@
 .row
   .col-sm-9#content
     %h2 My Wish List
-    %table.table.table-bordered.table-hover
-      %thead
-        %tr
-          %td.text-left Product Name
-          %td.text-right Stock
-          %td.text-right Unit Price
-          %td.text-right Action
-      %tbody#wishlist-row
-      - @wish_lists.each do |product|
-        %tr
-          %td.text-left
-            = link_to product.name, product_path(product)
-          -if product.status
+    - if @wish_lists.present?
+      %table.table.table-bordered.table-hover
+        %thead
+          %tr
+            %td.text-left Product Name
+            %td.text-right Stock
+            %td.text-right Unit Price
+            %td.text-right Action
+        %tbody#wishlist-row
+        - @wish_lists.each do |product|
+          %tr
+            %td.text-left
+              = link_to product.name, product_path(product)
+            -if product.status
+              %td.text-right
+                %b.true
+                  In Stock
+            -else
+              %td.text-right
+                %b.false
+                  Out of Stock
             %td.text-right
-              %b.true
-                In Stock
-          -else
+              %b
+                = product.price
             %td.text-right
-              %b.false
-                Out of Stock
-          %td.text-right
-            %b
-              = product.price
-          %td.text-right
-            
-            = link_to '', add_product_cart_item_path(product), method: :post, class: "btn btn-primary fa fa-shopping-cart"
+              
+              = link_to '', add_product_cart_item_path(product), method: :post, class: "btn btn-primary fa fa-shopping-cart"
 
-            = link_to '', cart_item_path(product), method: :delete, data: { confirm: 'Are You Sure?'}, type: "button", class: 'btn btn-danger fa fa-times'
-    .buttons.clearfix
-      .pull-right
-        = link_to 'Home', '/', class: 'btn btn-primary'
+              = link_to '', wish_list_path(product), method: :delete, data: { confirm: 'Are You Sure?'}, type: "button", class: 'btn btn-danger fa fa-times'
+      .buttons.clearfix
+        .pull-right
+          = link_to 'Home', '/', class: 'btn btn-primary'
+    - else
+      %p There is no product in wish list.
+      .buttons
+        .pull-right
+          = link_to 'Continue Shopping', '/', input_class: 'btn btn-primary'

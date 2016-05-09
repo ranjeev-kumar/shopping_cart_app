@@ -21,6 +21,7 @@ class CartItemsController < ApplicationController
 
   def destroy
     @item = CartItem.find_by(product_id: params[:id])
+    binding.pry
     if @item.destroy
       flash[:notice] = "Product removed sucessfully!"
     else

@@ -23,9 +23,8 @@
                 %span.hidden-xs.hidden-sm.hidden-md
                   = link_to 'ADD TO CART', add_product_cart_item_path(product), method: :post
               %button
-                = link_to '', wish_lists_path(:product=>product.id), method: :post, class: "fa fa-heart"
-              %button
-                %i.fa.fa-exchange
+                %span.hidden-xs.hidden-sm.hidden-md
+                  = link_to '', wish_lists_path(:product=>product.id), method: :post, class: "fa fa-heart"
 .row
   .col-sm-6.text-left
   .col-sm-6.text-right

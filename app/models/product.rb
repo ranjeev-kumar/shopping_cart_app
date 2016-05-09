@@ -16,7 +16,6 @@ class Product < ActiveRecord::Base
   validates :description, length: { in: 10..255}
   validates :price, format: { with: /\d+(\.\d{1,2})?/}
   
-
   # Scopes
   scope :category_products, ->(category_id) { joins(:categories).where('categories.category_id = ?', category_id) }
 

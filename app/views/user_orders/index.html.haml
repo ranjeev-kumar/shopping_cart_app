@@ -1,55 +1,39 @@
 .row
-  = render 'addresses/index'
-%hr
+  .col-sm-12
+    .col-sm-9
+      - if @user_orders.present?
+        .table-responsive
+          %table.table.table-bordered
+            %thead
+              %tr
+                %td.text-center Product Id
+                %td.text-center Order Date
+                %td.text-center Amount
+                %td.text-center Status
+                %td.text-center Action
+            - @user_orders.each do |order|
+              %tbody
+                %tr
+                  %td.text-center 
+                    = order.id
+                  %td.text-center
+                    = order.created_at.to_date.strftime('%d-%m-%Y')
+                  %td.text-center
+                    = order.total_amount
+                  %td.text-center
+                    = order.status
+                  %td.text-center
+                    = link_to 'show'
+    %column#column-right.col-sm-3.hidden-xs
+      .list-group
+        %a.list-group-item{:input => "#"} Register
+        %a.list-group-item{:input => "#"} Forgotten Password
+        %a.list-group-item{:input => "#"} My Account
+        %a.list-group-item{:input => "#"} Address Books
+        %a.list-group-item{:input => "#"} Wish List
+        %a.list-group-item{:input => "#"} Order History
+        %a.list-group-item{:input => "#"} Returns
 .row
-  .col-sm-1
-  .col-sm-9#content
-    %h1 Order Summary
-    .table-responsive
-      %table.table.table-bordered
-        %thead
-          %tr
-            %td.text-center Product Name
-            %td.text-center Quantity
-            %td.text-center Total
-        %tbody
-          -@cart_products.each do |product|
-            %tr
-              %td.text-left
-                = link_to product.name, product_path(product)
-              %td.text-center
-                = product.quantity
-              %td.text-right
-                = product.amount
-          %tr
-            %td{colspan: "2"}
-              %strong Sub-Total:
-            %td.text-right
-              %strong
-                = @total_amount
-          %tr
-            %td{colspan: "2"}
-              %strong Total:
-            %td.text-right
-              %strong
-                = @total_amount
-    %h3 Get Discount if you have a discount coupon.
-    .panel-group#acordion
-      .panel.panel-default
-        .panel-heading
-          %h4.panel-title
-            %a.accordion-toggle.collapsed{"data-parent" => "#accordion", "data-toggle" => "collapse", :href => "#collapse-coupon"}
-              Use Coupon Code
-              %i.fa.fa-caret-down
-        .panel-collapse.collapse#collapse-coupon
-          .panel-body
-            = form_tag(apply_discount_coupon_path method: "get", id: "coupon-form") do
-              .input-group
-                = select_tag 'coupon_id', options_for_select(coupons_list), include_blank: 'Select a Coupon here...', class:'form-control', id: 'input-coupon'
-                %span.input-group-btn
-                  = submit_tag "Apply Coupon", class: 'btn btn-primary', id: 'button-coupon'
-    .buttons
-      .pull-left
-        = link_to 'Continue Shopping', '/', type: 'button', class: 'btn btn-default'
-      .pull-right
-        = link_to 'Payment', clear_cart_cart_items_path, type: 'button', class: 'btn btn-primary'
+  .col-sm-6.text-left
+  .col-sm-6.text-right
+    = will_paginate @user_orders

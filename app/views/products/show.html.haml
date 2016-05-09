@@ -45,8 +45,6 @@
         .btn-group
           %button.btn.btn-default
             = link_to '', wish_lists_path(@product), method: :post, class: "fa fa-heart"
-          %button.btn.btn-default
-            %i.fa.fa-exchange
         %h1 
           = @product.name
         %table.table
@@ -76,20 +74,4 @@
             %br
             #button-cart
               = link_to 'ADD TO CART', add_product_cart_item_path(@product), method: :post, class: 'btn btn-primary btn-lg btn-block'
-        .rating
-          %p
-            %span.fa.fa-stack
-              %i.fa.fa-star-o.fa-stack-1x
-            %span.fa.fa-stack
-              %i.fa.fa-star-o.fa-stack-1x
-            %span.fa.fa-stack
-              %i.fa.fa-star-o.fa-stack-1x
-            %span.fa.fa-stack
-              %i.fa.fa-star-o.fa-stack-1x
-            %span.fa.fa-stack
-              %i.fa.fa-star-o.fa-stack-1x
-            %a{:input => "", :onclick => "$('a[input=\\'#tab-review\\']').trigger('click'); return false;"} 0 reviews
-            \/
-            %a{:input => "", :onclick => "$('a[input=\\'#tab-review\\']').trigger('click'); return false;"} Write a review
-          %hr
       

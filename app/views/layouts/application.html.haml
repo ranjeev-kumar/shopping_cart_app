@@ -14,7 +14,7 @@
             %li
               %a{input: "#{}"}
                 %i.fa.fa-phone
-              %span.hidden-xs.hidden-sm.hidden-md 123456789
+                %span.hidden-xs.hidden-sm.hidden-md 123456789
             %li.dropdown
               - unless user_signed_in?
                 %a.dropdown-toggle{"data-toggle" => "dropdown", title: "My Account"}
@@ -36,9 +36,7 @@
                   %li
                     = link_to "My Profile"
                   %li
-                    = link_to "Orders History"
-                  %li
-                    = link_to "Transactions"
+                    = link_to "Orders History", user_orders_path
                   %li
                     = link_to 'Sign Out', destroy_user_session_path, method: :delete
             %li
@@ -62,11 +60,11 @@
             #logo
               = link_to image_tag("logo.png"), '/'
           .col-sm-5
-            #search.input-group
-              %input.form-control.input-lg{name: "search", placeholder: "Search", type: "text", value: ""}
-                %span.input-group-btn
-                  %button.btn.btn-default.btn-lg{type: "button"}
-                    %i.fa.fa-search
+            = form_tag(search_product_products_path, method: :get) do
+              #search.input-group
+                = search_field_tag 'search', '', class: 'form-control input-lg', autocomplete: :off
+                .input-group-btn
+                  = submit_tag 'Search', class: 'btn btn-default btn-lg', id: 'button-search'
           .col-sm-3
             #cart.btn-group.btn-block
               %button.btn.btn-inverse.btn-block.btn-lg.dropdown-toggle{"data-loading-text" => "Loading...", "data-toggle" => "dropdown", type: "button"}
@@ -127,16 +125,14 @@
                 %ul.nav.navbar-nav
                   - @categories.each do |category|
                     %li.dropdown
-                      %a.dropdown-toggle{"data-toggle" => "dropdown"} 
-                        = category.name
-                      .dropdown-menu
-                        .dropdown-inner
-                          %ul.list-unstyled
-                            - category.subcategories.each do |subcat|
-                              %li
-                                = link_to subcat.name, category_path(subcat)
-                        .see-all
-                          = link_to category.name, category_path(category)
+                      = link_to "#{category.name}", category_path(category), class: "dropdown-toggle"
+                      -if category.subcategories.present?
+                        .dropdown-menu
+                          .dropdown-inner
+                            %ul.list-unstyled
+                              - category.subcategories.each do |subcat|
+                                %li
+                                  = link_to subcat.name, category_path(subcat)
     .container
       .alert.notice
         = notice

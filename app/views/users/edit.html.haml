@@ -1,0 +1,33 @@
+.row
+  .col-sm-9#content
+    %h1 My Account Information
+    = simple_form_for @user do |f|
+      %fieldset
+        %legend Your Personal Details
+        .form-group
+          - if @user.errors.any?
+            #error_explanation
+              %h3
+                = pluralize(@user.errors.count, "error")
+                Prohibited this User form being saved:
+              %ul
+                - @user.errors.full_messages.each do |msg|
+                  %li= msg
+        .form-group.required
+          = f.input :fname, class: 'form-control'
+        .form-group
+          = f.input :lname, class: 'form-control'
+        .form-group.required
+          = f.input :email, class: 'form-control'
+        .form-group
+          = f.input :phone, class: 'form-control'
+        = f.button :submit, 'Submit', class: 'btn btn-primary pull-right'
+  %column#column-right.col-sm-3.hidden-xs
+    .list-group
+      %a.list-group-item{:input => "#"} Register
+      %a.list-group-item{:input => "#"} Forgotten Password
+      %a.list-group-item{:input => "#"} My Account
+      %a.list-group-item{:input => "#"} Address Books
+      %a.list-group-item{:input => "#"} Wish List
+      %a.list-group-item{:input => "#"} Order History
+      %a.list-group-item{:input => "#"} Returns
