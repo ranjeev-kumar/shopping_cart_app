@@ -2,8 +2,9 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
-  devise :omniauthable, :omniauth_providers => [:facebook]
+         :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:facebook, :google_oauth2]
+  # devise :omniauthable, :omniauth_providers => [:facebook]
+  # devise :omniauthable, :omniauth_providers => [:google_oauth2]
 
   # Associations
   has_many :addresses, dependent: :destroy
@@ -23,7 +24,6 @@ class User < ActiveRecord::Base
 
   def self.from_omniauth(auth)
     user = where(provider: auth.provider, uid: auth.uid).first_or_initialize# do |user|
-    binding.pry
       user.provider = auth.provider
       user.uid = auth.uid
       user.email = auth.info.email
@@ -41,6 +41,16 @@ class User < ActiveRecord::Base
         user.email = data["email"] if user.email.blank?
       end
     end
+  end
+
+  def self.from_omniauth(access_token)
+    data = access_token.info
+    user = User.where(:email => data["email"]).first
+        user = User.create(fname: data["name"],
+        email: data["email"],
+        password: Devise.friendly_token[0,20]
+      )
+    user
   end
 
   def facebook_profile_image(size)
