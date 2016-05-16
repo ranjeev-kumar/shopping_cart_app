@@ -16,12 +16,12 @@ class CartItemsController < ApplicationController
     else
       flash[:alert] = "Something Went wrong!"
     end
-    redirect_to '/'  
+    @cart_products = current_user.cart_items.joins(:product).select('products.id, products.name, cart_items.quantity, cart_items.quantity * products.price as amount, products.price')
+    @total_amount = @cart_products.map(&:amount).sum 
   end
 
   def destroy
     @item = CartItem.find_by(product_id: params[:id])
-    binding.pry
     if @item.destroy
       flash[:notice] = "Product removed sucessfully!"
     else

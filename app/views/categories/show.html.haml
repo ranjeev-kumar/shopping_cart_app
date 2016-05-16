@@ -23,14 +23,11 @@
                       Price : Rs. 
                       = product.price
                 .button-group
-                  %button{:onclick => "cart.add('43');", :type => "button"}
-                    %i.fa.fa-shopping-cart
+                  %button
                     %span.hidden-xs.hidden-sm.hidden-md
-                      = link_to 'ADD TO CART', add_product_cart_item_path(product), method: :post
+                      = link_to 'ADD TO CART', add_product_cart_item_path(product), remote: true, method: :post, class: 'fa fa-shopping-cart'
                   %button
-                    = link_to '', wish_lists_path(:product=>product.id), method: :post, class: "fa fa-heart"
-                  %button
-                    %i.fa.fa-exchange
+                    = link_to '', wish_lists_path(:product=>product.id), remote: true, method: :post, class: "fa fa-heart"
       .row
         .col-sm-6.text-left
         .col-sm-6.text-right

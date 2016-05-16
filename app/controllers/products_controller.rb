@@ -8,15 +8,16 @@ class ProductsController < ApplicationController
   end
 
   def search_product
-    if params[:search]
+    binding.pry
+    unless params[:search] == ""
       @products = Product.where('name LIKE ?', params[:search]).paginate(page: params[:page], per_page: 8)
       unless @products.present?
         flash[:alert] = "#{params[:search]} is not available this time."
-        render 'dashboards/index'
       end
+      render 'dashboards/index'
     else
       flash[:alert] = "Enter Product name and Try again!"
-      redirect_to '/'
+      redirect_to root_path
     end
   end
 

@@ -44,7 +44,7 @@
       .col-sm-4
         .btn-group
           %button.btn.btn-default
-            = link_to '', wish_lists_path(@product), method: :post, class: "fa fa-heart"
+            = link_to '', wish_lists_path(@product), remote: true, method: :post, class: "fa fa-heart"
         %h1 
           = @product.name
         %table.table
@@ -73,5 +73,5 @@
           .form-group
             %br
             #button-cart
-              = link_to 'ADD TO CART', add_product_cart_item_path(@product), method: :post, class: 'btn btn-primary btn-lg btn-block'
+              = link_to 'ADD TO CART', add_product_cart_item_path(@product), remote: true, method: :post, class: 'btn btn-primary btn-lg btn-block'
       

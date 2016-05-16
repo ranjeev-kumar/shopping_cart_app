@@ -1,0 +1,1 @@
+$('#wish-list').text("Wish List (<%= @list_count %>)");

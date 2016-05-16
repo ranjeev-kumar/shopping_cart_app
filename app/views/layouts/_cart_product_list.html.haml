@@ -1,0 +1,48 @@
+#cart.btn-group.btn-block
+  %button.btn.btn-inverse.btn-block.btn-lg.dropdown-toggle{"data-loading-text" => "Loading...", "data-toggle" => "dropdown", type: "button"}
+    %i.fa.fa-shopping-cart
+    %span#cart-total 
+      = "#{item_counts} item(s) - Rs.#{@total_amount}"
+  %ul.dropdown-menu.pull-right
+    - unless @cart_products.present?
+      %li
+        %p.text-center Your shopping cart is empty!
+    - else
+      %li
+        %table.table.table-striped
+          %tbody
+          -@cart_products.each do |product|
+            %tr
+              %td.text-center
+                = link_to image_tag("logo.png", height: 100, width: 200), product_path(product)
+              %td.text-left
+                = link_to product.name, product_path(product)
+              %td.text-right
+                x 
+                = product.quantity
+              %td.text-right
+                = product.amount
+              %td.text-center
+                = link_to '', cart_item_path(product), method: :delete, data: { confirm: 'Are You Sure?'}, type: "button", class: 'btn btn-danger fa fa-times-circle'
+      %li
+        %div
+          %table.table.table-bordered
+            %tbody
+              %tr
+                %td.text-right
+                  %strong Sub-Total
+                %td.text-right
+                  = @total_amount
+              %tr
+                %td.text-right
+                  %strong Total
+                %td.text-right
+                  = @total_amount
+          %p.text-right
+            %strong
+              %a.fa.fa-shopping-cart
+                = link_to "Shopping Cart  ", cart_items_path
+            &nbsp;&nbsp;&nbsp;
+            %strong
+              %a.fa.fa-share
+                = link_to "Checkout", cart_items_path

@@ -46,6 +46,8 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 # Gmail login
 gem "omniauth-google-oauth2"
+# Dumb data to Seed.rb
+gem 'seed_dump'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

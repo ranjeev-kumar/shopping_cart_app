@@ -17,7 +17,7 @@ class WishListsController < ApplicationController
         flash[:alert] = "Something Went wrong!"
       end
     end
-    redirect_to '/' 
+    @list_count = current_user.wish_lists.count
   end
 
    def destroy
