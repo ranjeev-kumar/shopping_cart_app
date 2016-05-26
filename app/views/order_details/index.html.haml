@@ -1,0 +1,41 @@
+.row
+  .col-sm-1
+  .col-sm-9#content
+    %h1 Order History
+    .table-responsive
+      %table.table.table-bordered
+        %thead
+          %tr
+            %td.text-center Product Name
+            %td.text-center Quantity
+            %td.text-center Price per Unit
+        %tbody
+          -@order_history.each do |product|
+            %tr
+              %td.text-left
+                = link_to product.name, product_path(product)
+              %td.text-center
+                = product.quantity
+              %td.text-right
+                = product.price
+          %tr
+            %td{colspan: "2"}
+              %strong Sub-Total:
+            %td.text-right
+              %strong
+                = @amount
+            %tr
+              %td{colspan: "2"}
+                %strong Discount:
+              %td.text-right
+                %strong.discount
+                  = @amount - @order.total_amount
+            %tr
+              %td{colspan: "2"}
+                %strong Total:
+              %td.text-right
+                %strong.total
+                  = @order.total_amount
+    .buttons
+      .pull-left
+        = link_to 'Continue Shopping', '/', type: 'button', class: 'btn btn-default'

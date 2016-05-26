@@ -59,4 +59,4 @@
       .pull-left
         = link_to 'Continue Shopping', '/', type: 'button', class: 'btn btn-default'
       .pull-right
-        = link_to 'Payment', clear_cart_cart_items_path, type: 'button', class: 'btn btn-primary'
+        = link_to 'Payment', new_payment_gateway_path(:user_order_id=>params[:id]), type: 'button', class: 'btn btn-primary'

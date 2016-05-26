@@ -23,7 +23,7 @@
                   %td.text-center
                     = order.status
                   %td.text-center
-                    = link_to 'show'
+                    = link_to 'show', order_details_path(order_id: order.id)
     %column#column-right.col-sm-3.hidden-xs
       .list-group
         %a.list-group-item{:input => "#"} Register

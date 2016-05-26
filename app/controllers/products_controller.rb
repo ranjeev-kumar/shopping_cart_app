@@ -8,7 +8,6 @@ class ProductsController < ApplicationController
   end
 
   def search_product
-    binding.pry
     unless params[:search] == ""
       @products = Product.where('name LIKE ?', params[:search]).paginate(page: params[:page], per_page: 8)
       unless @products.present?

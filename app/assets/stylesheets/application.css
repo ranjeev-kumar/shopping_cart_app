@@ -43,3 +43,9 @@ hr {
 input[id=button-search] {
   margin-top: -9px;
 }
+
+#stripe_error {
+  color: red;
+}
+
+.card {width: 35%;}

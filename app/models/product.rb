@@ -2,6 +2,7 @@ class Product < ActiveRecord::Base
   
   # Assosiations
   has_many :cart_items
+  has_many :order_details
   has_many :users, through: :cart_items
   has_many :images, dependent: :destroy
   has_many :product_attribute_associations, dependent: :destroy
