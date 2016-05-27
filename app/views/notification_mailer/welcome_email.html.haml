@@ -4,7 +4,8 @@
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
   %body
     %h1
-      Welcome to Shopping Demo app, #{@user.fname + " " + @user.lname}
+      - binding.pry
+      Welcome to Shopping Demo app, @user.fname
     %p
       You have successfully signed up to Shopping Demo app,
       your username is: #{@user.email}.

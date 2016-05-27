@@ -5,11 +5,12 @@ class NotificationMailer < ApplicationMailer
   def order_status_email(order, user)
     @order = order
     @user = user
-    mail(to: "ranjeev.wwindia@gmail.com", subject: 'Track your order status')
+    mail(to: @user.email, subject: 'Track your order status')
   end
 
   def welcome_email(user)
     @user = user
+    @url = root_path + "/users/sign_in"
     mail(to: @user.email, subject: 'Welcome to My Demo Shopping Cart app.')
   end
 
