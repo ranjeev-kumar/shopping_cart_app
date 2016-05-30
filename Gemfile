@@ -26,8 +26,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'devise'
 # Stripe payment gateway
 gem 'stripe'
-
-
+# Delayed job
+gem 'delayed_job_active_record'
 # Use haml instead of erb
 gem 'haml'
 # Use simple form

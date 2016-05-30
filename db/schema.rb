@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160524131227) do
+ActiveRecord::Schema.define(version: 20160530100227) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -103,6 +103,22 @@ ActiveRecord::Schema.define(version: 20160524131227) do
     t.decimal  "discount_of",    precision: 5, scale: 2
   end
 
+  create_table "delayed_jobs", force: :cascade do |t|
+    t.integer  "priority",   default: 0, null: false
+    t.integer  "attempts",   default: 0, null: false
+    t.text     "handler",                null: false
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
+
   create_table "images", force: :cascade do |t|
     t.string   "name"
     t.integer  "product_id"
@@ -156,9 +172,9 @@ ActiveRecord::Schema.define(version: 20160524131227) do
   create_table "products", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
-    t.boolean  "status",                              default: true
-    t.datetime "created_at",                                         null: false
-    t.datetime "updated_at",                                         null: false
+    t.boolean  "status",                              default: false
+    t.datetime "created_at",                                          null: false
+    t.datetime "updated_at",                                          null: false
     t.decimal  "price",       precision: 8, scale: 2
   end
 
