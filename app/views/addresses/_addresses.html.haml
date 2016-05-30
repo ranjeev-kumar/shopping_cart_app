@@ -1,0 +1,25 @@
+- if @addresses.present?
+  -@addresses.each do |address|
+    .col-sm-3
+      .panel.panel-primary
+        .panel-heading
+          %h4 Address
+        .panel-body
+          %p
+            %b
+              = "#{current_user.fname}"
+          %p
+            = "#{address.address_1} #{address.address_2}"
+            %br
+            = "#{address.city}"
+            %br
+            = "#{address.state}"
+            %br
+            = "#{address.country}"
+            %br
+            = "#{address.zipcode}"
+          -unless @user_order.shipping_address_id == address.id
+            = link_to add_order_address_user_orders_path(:address=> address.id,:order_id=>params[:id]), class: 'close pull-left' do
+              %i.glyphicon.glyphicon-plus Add Address
+= link_to 'Add New Address', new_address_path(:order_id=>params[:id]), class: 'btn btn-primary pull-left'           
+  

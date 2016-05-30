@@ -1,8 +1,9 @@
 class AddressesController < ApplicationController
 
-  before_action :set_address, only: [:edit, :update]
+  before_action :set_address, only: [:edit, :update, :destroy]
 
   def index
+    @addresses = current_user.addresses
   end
 
   def edit
@@ -16,7 +17,11 @@ class AddressesController < ApplicationController
     @address = current_user.addresses.build(address_params)
     if @address.save
       flash[:alert] = "Address saved sucessfully!"
-      redirect_to user_orders_path
+      if params[:order_id] == ""
+        redirect_to addresses_path
+      else
+        redirect_to user_order_path(params[:order_id])
+      end
     else
       flash[:alert] = "Something went wrong, Try again!"
       render 'new'
@@ -33,14 +38,11 @@ class AddressesController < ApplicationController
   end
 
   def destroy
-    @address = current_user.addresses.find(params[:address])
-    binding.pry
     if @address.destroy
       flash[:alert] = "Address removed sucessfully!"
     else
       flash[:alert] = "Something went wrong, Try again!"
     end
-    redirect_to user_orders_path
   end
 
   private

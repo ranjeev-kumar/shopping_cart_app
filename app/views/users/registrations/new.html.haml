@@ -24,9 +24,9 @@
         .col-sm-1
         .col-sm-10
           .form-group
-            = f.input :password, autocomplete: "off", class:'form-control', hint: "Password should be 8 characters long.", placeholder:'Password'
+            = f.input :password, autocomplete: "off", class:'form-control', hint: "Password should be 8 characters long.", placeholder:'Password', autocomplete: :off
           .form-group
-            = f.input :password_confirmation, autocomplete: "off", class:'form-control', placeholder:'Confirm Password', label: "Confirm Password"
+            = f.input :password_confirmation, autocomplete: "off", class:'form-control', placeholder:'Confirm Password', label: "Confirm Password", autocomplete: :off
       %fieldset
         %legend Newsletter
         .col-sm-1

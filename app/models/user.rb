@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
   has_many :coupons, through: :used_coupons
 
   # Callbacks
-  after_create :welcome_user
+  # after_create :welcome_user
 
   # validates_presence_of :fname
   # validates :fname, length: { minimum: 3, too_short: "should be atleast 3 characters long."}, format: { with: /[a-zA-Z]+/ }
@@ -43,22 +43,13 @@ class User < ActiveRecord::Base
     end
   end
 
-  def self.from_omniauth(access_token)
-    data = access_token.info
-    user = User.where(:email => data["email"]).first
-        user = User.create(fname: data["name"],
-        email: data["email"],
-        password: Devise.friendly_token[0,20]
-      )
-    user
-  end
-
   def facebook_profile_image(size)
     "http://graph.facebook.com/#{self.uid}/picture?type=#{size}"
   end
 
   private
     def welcome_user
+
       NotificationMailer.welcome_email(self).deliver_now
     end
 end

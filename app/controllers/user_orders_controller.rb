@@ -1,6 +1,6 @@
 class UserOrdersController < ApplicationController
 
-  before_action :set_cart_items, only: [:show, :confirm_order]
+  before_action :set_cart_items, only: [:index, :show, :confirm_order]
   before_action :set_user_order, only: [:add_order_address, :apply_discount]
   before_action :set_discount, only: [:show]
   before_action :create_user_order, only: [:confirm_order]
@@ -10,6 +10,7 @@ class UserOrdersController < ApplicationController
   end
 
   def show
+    @user_order = UserOrder.find(params[:id])
     @addresses = current_user.addresses
   end
 

@@ -156,9 +156,9 @@ ActiveRecord::Schema.define(version: 20160524131227) do
   create_table "products", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
-    t.boolean  "status",                              default: false
-    t.datetime "created_at",                                          null: false
-    t.datetime "updated_at",                                          null: false
+    t.boolean  "status",                              default: true
+    t.datetime "created_at",                                         null: false
+    t.datetime "updated_at",                                         null: false
     t.decimal  "price",       precision: 8, scale: 2
   end
 

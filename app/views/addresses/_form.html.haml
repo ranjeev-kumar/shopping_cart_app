@@ -8,6 +8,7 @@
         %ul
           - @address.errors.full_messages.each do |msg|
             %li= msg
+  = hidden_field_tag "order_id", params[:order_id]
   .form-group
     = f.input :address_1, class: 'form-controls datepicker', placeholder: 'Address line 1'
   .form-group

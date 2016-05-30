@@ -11,16 +11,16 @@
   = f.hidden_field :user_order_id
   .form-group.col-sm-9.col-sm-offset-4
     =label_tag :card_number, "Credit Card Number"
-    =text_field_tag :card_number, nil, name: nil, class: "form-control card"
+    =text_field_tag :card_number, nil, name: nil, class: "form-control card", autocomplete: :off
   .form-group.col-sm-2.col-sm-offset-4
     =label_tag :card_code, "Security Code on Card (CVV)"
-    =text_field_tag :card_code, nil, name: nil, class: "form-control "
+    =text_field_tag :card_code, nil, name: nil, class: "form-control ", type: 'password'
   .form-inline.form-group.col-sm-12.col-sm-offset-4
     =label_tag :card_month, "Card Expiration"
     %br
     =select_month nil, {add_month_numbers_true: true}, {name: nil, id: "card_month", class: 'form-control'}
     =select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card_year", class: 'form-control'}
-  #stripe_error
+  #stripe_error.col-sm-12.col-sm-offset-4
     %noscript JavaScript is not enabled and is required for this form. First enable it in your web browser settings.
   .actions.col-sm-2.col-sm-offset-4
     = f.submit 'Make Payment', class: "btn btn-default"

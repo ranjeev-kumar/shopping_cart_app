@@ -10,7 +10,7 @@ class NotificationMailer < ApplicationMailer
 
   def welcome_email(user)
     @user = user
-    @url = root_path + "/users/sign_in"
+    @url = root_url + "users/sign_in"
     mail(to: @user.email, subject: 'Welcome to My Demo Shopping Cart app.')
   end
 
