@@ -88,8 +88,9 @@
                                 %li
                                   = link_to subcat.name, category_path(subcat)
     .container
-      .alert.notice
+      .notice
         = notice
+      .alert
         = alert
       = yield
     %footer
@@ -99,7 +100,8 @@
             %h5 Information
             %ul.list-unstyled
               %li
-                %a{input: "#"} About Us
+                %a
+                  = link_to 'About Us', abouts_path
               %li
                 %a{input: "#"} Delivery Information
               %li

@@ -49,3 +49,16 @@ input[id=button-search] {
 }
 
 .card {width: 35%;}
+
+.alert {color:red;}
+.notice {color: #094A8B;}
+
+.alert, .notice {font-weight: bold; text-align: center;}
+
+.pic{
+  margin-left: 50px;
+}
+
+.para {
+  font-size: 14px;
+}

@@ -1,0 +1,20 @@
+.row
+  %h2 About Us
+  %hr
+  %br
+  .col-sm-7#content
+    %p.para
+      = @about.para1
+    %p.para
+      = @about.para2
+    %p.para
+      = @about.para3
+    %p.para
+      Sincerely,
+      %br
+      %strong Ranjeev Kumar Singh
+  .col-sm-4.pic
+    = image_tag("#{@about.avatar.url}", height: 600, width: 400)
+.buttons
+  .pull-right
+    = link_to 'Continue Shopping', '/', input_class: 'btn btn-primary'

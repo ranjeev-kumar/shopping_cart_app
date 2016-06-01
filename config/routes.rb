@@ -18,6 +18,7 @@ Rails.application.routes.draw do
 
   resources :admins, :users, :dashboards, :categories, :addresses
   resources :order_details, :wish_lists, :payment_gateways, :coupons, :payments
+  resources :abouts, only: [:index]
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
 

@@ -1,0 +1,7 @@
+<% if user_signed_in? %>
+    $('#cart-total').text(" <%= item_counts %> item(s) - Rs. <%= @total_amount %>");
+    $('#cart-list').html("<%= escape_javascript(render 'layouts/cart_product_list') %>");
+<% else %>
+    console.log("Else")
+    $(".alert").html("You need to sign in first.");
+<% end %>

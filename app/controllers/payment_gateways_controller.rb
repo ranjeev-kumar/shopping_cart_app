@@ -5,7 +5,6 @@ class PaymentGatewaysController < ApplicationController
   def new
     order = UserOrder.find(params[:user_order_id])
     unless order.shipping_address_id == nil
-      current_user.cart_items.destroy_all
       @payment_gateway = PaymentGateway.new(user_order_id: params[:user_order_id].to_i)
     else
       redirect_to user_order_path(params[:user_order_id].to_i)
@@ -30,6 +29,7 @@ class PaymentGatewaysController < ApplicationController
     )
     redirect_to root_path
     flash[:notice] = "Thank you for Shopping.!"
+    current_user.cart_items.destroy_all
   rescue Stripe::CardError => e
     flash[:notice] = e.message
     redirect_to new_payment_gateway_path(user_order_id: params[:payment_gateway][:user_order_id])
